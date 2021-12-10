@@ -1,0 +1,54 @@
+{
+  "generator-jhipster": {
+    "blueprints": [
+      {
+        "name": "generator-jhipster-nodejs",
+        "version": "2.0.0"
+      }
+    ],
+    "otherModules": [
+      {
+        "name": "generator-jhipster-nodejs",
+        "version": "2.0.0"
+      }
+    ],
+    "applicationType": "monolith",
+    "baseName": "studentsManagement",
+    "jhipsterVersion": "7.0.1",
+    "skipClient": false,
+    "skipServer": false,
+    "skipUserManagement": false,
+    "skipCheckLengthOfIdentifier": false,
+    "skipFakeData": false,
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "testFrameworks": [],
+    "pages": [],
+    "creationTimestamp": 1639165950172,
+    "serverPort": "8081",
+    "packageName": "com.jhipster.node",
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "authenticationType": "jwt",
+    "clientFramework": "angularX",
+    "withAdminUi": true,
+    "clientTheme": "cosmo",
+    "clientThemeVariant": "primary",
+    "enableTranslation": false,
+    "nativeLanguage": "en",
+    "packageFolder": "com/jhipster/node",
+    "jwtSecretKey": "NjI5MWUwYTZlODFkYTE5NGZlNDQwOWYwNjkwOGE3ZGI1OGFjNGFhMWYyYzc2MTlhYjAxMDY1OGUyYWI4OGE5ZGRmMWRlOThlZTVlZmE1MDczZGE4Y2JmYTc3OTg5OGJjMDdjNmE0YmVkZTc3NThmNzY0M2UzOWE0NDg4Zjc4ZTY=",
+    "serviceDiscoveryType": false,
+    "websocket": false,
+    "searchEngine": false,
+    "messageBroker": false,
+    "enableHibernateCache": false,
+    "clientPackageManager": "npm",
+    "cacheProvider": "ehcache",
+    "buildTool": "maven",
+    "reactive": false,
+    "languages": ["en", "fr"]
+  }
+}
