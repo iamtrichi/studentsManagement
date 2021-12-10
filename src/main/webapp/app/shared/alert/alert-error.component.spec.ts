@@ -40,7 +40,7 @@ describe('Component Tests', () => {
     describe('Error Handling', () => {
       it('Should display an alert on status 0', () => {
         // GIVEN
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: { status: 0 } });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: { status: 0 } });
         // THEN
         expect(comp.alerts.length).toBe(1);
         expect(comp.alerts[0].message).toBe('Server not reachable');
@@ -48,7 +48,7 @@ describe('Component Tests', () => {
 
       it('Should display an alert on status 404', () => {
         // GIVEN
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: { status: 404 } });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: { status: 404 } });
         // THEN
         expect(comp.alerts.length).toBe(1);
         expect(comp.alerts[0].message).toBe('Not found');
@@ -56,8 +56,8 @@ describe('Component Tests', () => {
 
       it('Should display an alert on generic error', () => {
         // GIVEN
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: { error: { message: 'Error Message' } } });
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: { error: 'Second Error Message' } });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: { error: { message: 'Error Message' } } });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: { error: 'Second Error Message' } });
         // THEN
         expect(comp.alerts.length).toBe(2);
         expect(comp.alerts[0].message).toBe('Error Message');
@@ -79,7 +79,7 @@ describe('Component Tests', () => {
             message: 'error.validation',
           },
         });
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: response });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: response });
         // THEN
         expect(comp.alerts.length).toBe(1);
         expect(comp.alerts[0].message).toBe('error.validation');
@@ -93,7 +93,7 @@ describe('Component Tests', () => {
           status: 400,
           error: 'Bad Request',
         });
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: response });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: response });
         // THEN
         expect(comp.alerts.length).toBe(1);
         expect(comp.alerts[0].message).toBe('Bad Request');
@@ -115,7 +115,7 @@ describe('Component Tests', () => {
             fieldErrors: [{ objectName: 'foo', field: 'minField', message: 'Min' }],
           },
         });
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: response });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: response });
         // THEN
         expect(comp.alerts.length).toBe(1);
         expect(comp.alerts[0].message).toBe('Error on field "MinField"');
@@ -133,7 +133,7 @@ describe('Component Tests', () => {
             message: 'error.validation',
           },
         });
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: response });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: response });
         // THEN
         expect(comp.alerts.length).toBe(1);
         expect(comp.alerts[0].message).toBe('Error Message');
@@ -152,7 +152,7 @@ describe('Component Tests', () => {
             detail: 'Detailed error message',
           },
         });
-        eventManager.broadcast({ name: 'studentsManagementApp.httpError', content: response });
+        eventManager.broadcast({ name: 'nizarApp.httpError', content: response });
         // THEN
         expect(comp.alerts.length).toBe(1);
         expect(comp.alerts[0].message).toBe('Detailed error message');

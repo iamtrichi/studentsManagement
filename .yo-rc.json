@@ -49,6 +49,8 @@
     "cacheProvider": "ehcache",
     "buildTool": "maven",
     "reactive": false,
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["Subjects", "Students", "Profiles", "Appreciations"],
+    "lastLiquibaseTimestamp": 1639167511000
   }
 }

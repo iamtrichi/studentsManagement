@@ -4,49 +4,70 @@
   </div>
 
   <div class="col-md-9">
-    <h1 class="display-4">Welcome, Java Hipster!</h1>
-
-    <p class="lead">This is your homepage</p>
-
     <div [ngSwitch]="isAuthenticated()">
+      <h1 class="display-4" *ngSwitchCase="false">Welcome, Student managements!</h1>
+
+      <p class="lead" *ngSwitchCase="false">This is your homepage</p>
+
       <div class="alert alert-success" *ngSwitchCase="true">
         <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
       </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>If you want to </span>
-        <a class="alert-link" (click)="login()">sign in</a
-        ><span
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register">Register a new account</a>
+      <div class="row">
+        <div style="width: 100%; display: contents" *ngSwitchCase="true">
+          <div class="card text-white bg-primary mb-3" style="min-width: 20rem">
+            <div class="card-body">
+              <h4 class="card-title">Total of students:</h4>
+              <div class="card-text center">
+                <h2>{{ obj.students }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="card text-white bg-success mb-3" style="min-width: 20rem">
+            <div class="card-body">
+              <h4 class="card-title">Total of appreciations:</h4>
+              <div class="card-text center">
+                <h2>{{ obj.appreciations }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="card text-white bg-danger mb-3" style="min-width: 20rem">
+            <div class="card-body">
+              <h4 class="card-title">Total of profiles:</h4>
+              <div class="card-text center">
+                <h2>{{ obj.profiles }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="card text-white bg-warning mb-3" style="min-width: 20rem">
+            <div class="card-body">
+              <h4 class="card-title">Total of subjects:</h4>
+              <div class="card-text center">
+                <h2>{{ obj.subjects }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="card text-white bg-info mb-3" style="min-width: 20rem">
+            <div class="card-body">
+              <h4 class="card-title">Total of users:</h4>
+              <div class="card-text center">
+                <h2>{{ obj.users }}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-warning" *ngSwitchCase="false">
+          <span>If you want to </span>
+          <a class="alert-link" (click)="login()">sign in</a
+          ><!-- <span
+            >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
+            password="user").</span
+          > -->
+        </div>
+        <div class="alert alert-warning" *ngSwitchCase="false">
+          <span>You don't have an account yet?</span>&nbsp;
+          <a class="alert-link" routerLink="account/register">Register a new account</a>
+        </div>
       </div>
     </div>
-    <p>If you have any question on JHipster or NHipster:</p>
-    <ul>
-      <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
-      <li>
-        <a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a>
-      </li>
-      <li>
-        <a href="https://github.com/jhipster/generator-jhipster-nodejs/issues?state=open" target="_blank" rel="noopener noreferrer"
-          >NHipster bug tracker</a
-        >
-      </li>
-      <li>
-        <a href="https://gitter.im/jhipster/generator-jhipster-nodejs" target="_blank" rel="noopener noreferrer"
-          >NHipster public chat room</a
-        >
-      </li>
-      <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
-    </ul>
-    <p>
-      <span>If you like NHipster, don't forget to give us a star on</span>
-      <a href="https://github.com/jhipster/generator-jhipster-nodejs" target="_blank" rel="noopener noreferrer">GitHub</a>!
-    </p>
   </div>
 </div>
