@@ -10,6 +10,7 @@ import { HttpResponse } from '@angular/common/http';
 import { AppreciationsService } from 'app/entities/appreciations/service/appreciations.service';
 import { SubjectsService } from 'app/entities/subjects/service/subjects.service';
 import { UserService } from 'app/entities/user/user.service';
+import { LoginService } from 'app/login/login.service';
 
 @Component({
   selector: 'jhi-home',
@@ -34,7 +35,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private profilesService: ProfilesService,
     private appreciationsService: AppreciationsService,
     private subjectsService: SubjectsService,
-    private usersService: UserService
+    private usersService: UserService,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -89,6 +91,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
+  logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
   ngOnDestroy(): void {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
