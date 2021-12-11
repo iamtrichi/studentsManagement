@@ -8,17 +8,17 @@ const logger = new Logger('Config');
 export class Config {
     debugLogging = 'debug';
     'server.port' = '8081';
-    'jhipster.clientApp.name' = 'studentsManagement';
+    'jhipster.clientApp.name' = 'nizar';
     'jhipster.registry.password' = 'admin';
     'jhipster.security.authentication.jwt.base64-secret' = '';
     'jhipster.security.authentication.jwt.token-validity-in-seconds' = 86400;
     'jhipster.security.authentication.jwt.token-validity-in-seconds-for-remember-me' = 2592000;
     'jhipster.security.authentication.jwt.hash-salt-or-rounds' = 10;
     'jhipster.mail.base-url' = 'http://127.0.0.1:${server.port}';
-    'jhipster.mail.from' = 'studentsManagement@localhost';
+    'jhipster.mail.from' = 'nizar@localhost';
     'jhipster.swagger.default-include-pattern' = '/api/.*';
-    'jhipster.swagger.title' = 'studentsManagement API';
-    'jhipster.swagger.description' = 'studentsManagement API documentation';
+    'jhipster.swagger.title' = 'nizar API';
+    'jhipster.swagger.description' = 'nizar API documentation';
     'jhipster.swagger.version' = '0.0.1';
     'jhipster.swagger.path' = '/api/v2/api-docs';
     'eureka.client.enabled' = true;
@@ -27,8 +27,8 @@ export class Config {
     'eureka.client.register-with-eureka' = true;
     'eureka.client.instance-info-replication-interval-seconds' = 10;
     'eureka.client.registry-fetch-interval-seconds' = 10;
-    'eureka.instance.appname' = 'studentsManagement';
-    'eureka.instance.instanceId' = 'studentsManagement:${random.value}';
+    'eureka.instance.appname' = 'nizar';
+    'eureka.instance.instanceId' = 'nizar:${random.value}';
     'eureka.instance.lease-renewal-interval-in-seconds' = 5;
     'eureka.instance.lease-expiration-duration-in-seconds' = 10;
     'eureka.instance.status-page-url-path' = '${management.endpoints.web.base-path}/info';
@@ -41,7 +41,7 @@ export class Config {
     'eureka.instance.prefer-ip-address' = true;
     'eureka.client.service-url.defaultZone' = 'http://admin:${jhipster.registry.password}@localhost:8761/eureka/';
     'cloud.config.uri' = 'http://admin:${jhipster.registry.password}@localhost:8761/config';
-    'cloud.config.name' = 'studentsManagement';
+    'cloud.config.name' = 'nizar';
     'cloud.config.profile' = 'prod';
     'cloud.config.label' = 'master';
 

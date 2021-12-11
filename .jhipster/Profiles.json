@@ -1,0 +1,21 @@
+{
+  "name": "Profiles",
+  "fields": [
+    {
+      "fieldName": "profileIdentifier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "profiles",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211210201830"
+}

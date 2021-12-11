@@ -1,0 +1,22 @@
+
+entity Subjects {
+	subject String required unique,
+    keywords String required
+} 
+
+entity Students {
+	studentIdentifier String required unique,
+    studentFirstName String required,
+    studentLastName String required,
+    dateOfBirth LocalDate,
+    schoolYear String,
+    className String
+}
+
+entity Profiles {
+	profileIdentifier String required unique
+}
+
+entity Appreciations {
+	appreciationIdentifier String required unique
+}

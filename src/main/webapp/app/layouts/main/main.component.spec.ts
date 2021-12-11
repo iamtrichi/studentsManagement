@@ -50,7 +50,7 @@ describe('Component Tests', () => {
     });
 
     describe('page title', () => {
-      const defaultPageTitle = 'Students Management';
+      const defaultPageTitle = 'Nizar';
       const parentRoutePageTitle = 'parentTitle';
       const childRoutePageTitle = 'childTitle';
       const navigationEnd = new NavigationEnd(1, '', '');
