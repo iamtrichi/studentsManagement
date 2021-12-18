@@ -85,4 +85,55 @@
       </tbody>
     </table>
   </div>
+  <div class="row" id="entities" *ngIf="students && students.length > 0">
+    <div class="col col-md-3" *ngFor="let students of students; trackBy: trackId">
+      <div class="card" style="width: 400px">
+        <div style="cursor: pointer; width: max-content; position: absolute; right: 11px; top: 4px; font-size: x-large">
+          <div ngbDropdown class="pointer" display="dynamic" style="position: absolute; right: 11px; top: 4px">
+            <div ngbDropdownToggle id="entity-menu" data-cy="entity"></div>
+            <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+              <button
+                type="submit"
+                [routerLink]="['/students', students.id, 'edit']"
+                class="btn btn-primary btn-sm dropdown-item"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline"> Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(students)" class="btn btn-danger btn-sm dropdown-item" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline"> Delete</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div style="cursor: pointer; text-align: center; margin: 14px">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="150"
+            height="150"
+            fill="currentColor"
+            class="bi bi-person-circle"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+            <path
+              fill-rule="evenodd"
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+            />
+          </svg>
+        </div>
+        <div class="card-body" style="text-align: center">
+          <h4 class="card-title">{{ students.studentFirstName }} {{ students.studentLastName }}</h4>
+          <p class="card-text">{{ students.dateOfBirth | formatMediumDate }} {{ students.className }}</p>
+          <button type="submit" [routerLink]="['/students', students.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+            <fa-icon icon="eye"></fa-icon>
+            <span class="d-none d-md-inline">See Profile</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
