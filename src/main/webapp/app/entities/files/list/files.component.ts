@@ -2,28 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IStudents } from '../students.model';
-import { StudentsService } from '../service/students.service';
-import { StudentsDeleteDialogComponent } from '../delete/students-delete-dialog.component';
+import { IFiles } from '../files.model';
+import { FilesService } from '../service/files.service';
+import { FilesDeleteDialogComponent } from '../delete/files-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
-  selector: 'jhi-students',
-  templateUrl: './students.component.html',
+  selector: 'jhi-files',
+  templateUrl: './files.component.html',
 })
-export class StudentsComponent implements OnInit {
-  students?: IStudents[];
+export class FilesComponent implements OnInit {
+  files?: IFiles[];
   isLoading = false;
 
-  constructor(protected studentsService: StudentsService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
+  constructor(protected filesService: FilesService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
 
   loadAll(): void {
     this.isLoading = true;
 
-    this.studentsService.query().subscribe(
-      (res: HttpResponse<IStudents[]>) => {
+    this.filesService.query().subscribe(
+      (res: HttpResponse<IFiles[]>) => {
         this.isLoading = false;
-        this.students = res.body ?? [];
+        this.files = res.body ?? [];
       },
       () => {
         this.isLoading = false;
@@ -35,7 +35,7 @@ export class StudentsComponent implements OnInit {
     this.loadAll();
   }
 
-  trackId(index: number, item: IStudents): string {
+  trackId(index: number, item: IFiles): string {
     return item.id!;
   }
 
@@ -47,9 +47,9 @@ export class StudentsComponent implements OnInit {
     return this.dataUtils.openFile(base64String, contentType);
   }
 
-  delete(students: IStudents): void {
-    const modalRef = this.modalService.open(StudentsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.students = students;
+  delete(files: IFiles): void {
+    const modalRef = this.modalService.open(FilesDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.files = files;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {

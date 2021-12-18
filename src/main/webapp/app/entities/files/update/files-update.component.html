@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-files-heading" data-cy="FilesCreateUpdateHeading">Create or edit a Files</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_url">Url</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('urlContentType')!.value + ';base64,' + editForm.get('url')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('url')!.value"
+              alt="files image"
+            />
+            <div *ngIf="editForm.get('url')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('urlContentType')!.value }}, {{ byteSize(editForm.get('url')!.value) }}</span>
+              <button
+                type="button"
+                (click)="clearInputImage('url', 'urlContentType', 'file_url')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_url" data-cy="url" (change)="setFileData($event, 'url', true)" accept="image/*" />
+          </div>
+          <input type="hidden" class="form-control" name="url" id="field_url" data-cy="url" formControlName="url" />
+          <input type="hidden" class="form-control" name="urlContentType" id="field_urlContentType" formControlName="urlContentType" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

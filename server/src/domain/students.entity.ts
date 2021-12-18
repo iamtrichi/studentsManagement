@@ -31,5 +31,11 @@ export class Students extends BaseEntity {
     @Column({ name: 'studentName', nullable: true })
     studentName: string;
 
+    @Column({ type: 'blob', name: 'image', nullable: true })
+    image: any;
+
+    @Column({ name: 'imageContentType', nullable: true })
+    imageContentType: string;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 }

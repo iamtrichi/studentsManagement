@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IStudents } from '../students.model';
+import { IFiles } from '../files.model';
 import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
-  selector: 'jhi-students-detail',
-  templateUrl: './students-detail.component.html',
+  selector: 'jhi-files-detail',
+  templateUrl: './files-detail.component.html',
 })
-export class StudentsDetailComponent implements OnInit {
-  students: IStudents | null = null;
+export class FilesDetailComponent implements OnInit {
+  files: IFiles | null = null;
 
   constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ students }) => {
-      this.students = students;
+    this.activatedRoute.data.subscribe(({ files }) => {
+      this.files = files;
     });
   }
 

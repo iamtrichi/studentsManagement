@@ -38,6 +38,15 @@
         <dd>
           <span>{{ students.className }}</span>
         </dd>
+        <dt><span>Image</span></dt>
+        <dd>
+          <div *ngIf="students.image">
+            <a (click)="openFile(students.image, students.imageContentType)">
+              <img [src]="'data:' + students.imageContentType + ';base64,' + students.image" style="max-width: 100%" alt="students image" />
+            </a>
+            {{ students.imageContentType }}, {{ byteSize(students.image) }}
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

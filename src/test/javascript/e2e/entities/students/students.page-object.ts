@@ -36,6 +36,7 @@ export class StudentsUpdatePage {
   dateOfBirthInput = element(by.id('field_dateOfBirth'));
   schoolYearInput = element(by.id('field_schoolYear'));
   classNameInput = element(by.id('field_className'));
+  imageInput = element(by.id('file_image'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getText();
@@ -95,6 +96,14 @@ export class StudentsUpdatePage {
 
   async getClassNameInput(): Promise<string> {
     return await this.classNameInput.getAttribute('value');
+  }
+
+  async setImageInput(image: string): Promise<void> {
+    await this.imageInput.sendKeys(image);
+  }
+
+  async getImageInput(): Promise<string> {
+    return await this.imageInput.getAttribute('value');
   }
 
   async save(): Promise<void> {

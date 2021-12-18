@@ -39,6 +39,7 @@
           <th scope="col"><span>Date Of Birth</span></th>
           <th scope="col"><span>School Year</span></th>
           <th scope="col"><span>Class Name</span></th>
+          <th scope="col"><span>Image</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -53,6 +54,16 @@
           <td>{{ students.dateOfBirth | formatMediumDate }}</td>
           <td>{{ students.schoolYear }}</td>
           <td>{{ students.className }}</td>
+          <td>
+            <a *ngIf="students.image" (click)="openFile(students.image, students.imageContentType)">
+              <img
+                [src]="'data:' + students.imageContentType + ';base64,' + students.image"
+                style="max-height: 30px"
+                alt="students image"
+              />
+            </a>
+            <span *ngIf="students.image">{{ students.imageContentType }}, {{ byteSize(students.image) }}</span>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

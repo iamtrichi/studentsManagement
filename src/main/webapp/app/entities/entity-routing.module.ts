@@ -24,6 +24,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Appreciations' },
         loadChildren: () => import('./appreciations/appreciations.module').then(m => m.AppreciationsModule),
       },
+      {
+        path: 'files',
+        data: { pageTitle: 'Files' },
+        loadChildren: () => import('./files/files.module').then(m => m.FilesModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

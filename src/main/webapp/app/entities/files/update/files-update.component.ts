@@ -1,47 +1,42 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { IStudents, Students } from '../students.model';
-import { StudentsService } from '../service/students.service';
+import { IFiles, Files } from '../files.model';
+import { FilesService } from '../service/files.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 
 @Component({
-  selector: 'jhi-students-update',
-  templateUrl: './students-update.component.html',
+  selector: 'jhi-files-update',
+  templateUrl: './files-update.component.html',
 })
-export class StudentsUpdateComponent implements OnInit {
+export class FilesUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
     id: [],
-    studentIdentifier: [null, [Validators.required]],
-    studentFirstName: [null, [Validators.required]],
-    studentLastName: [null, [Validators.required]],
-    dateOfBirth: [],
-    schoolYear: [],
-    className: [],
-    image: [],
-    imageContentType: [],
+    url: [],
+    urlContentType: [],
+    description: [],
   });
 
   constructor(
     protected dataUtils: DataUtils,
     protected eventManager: EventManager,
-    protected studentsService: StudentsService,
+    protected filesService: FilesService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ students }) => {
-      this.updateForm(students);
+    this.activatedRoute.data.subscribe(({ files }) => {
+      this.updateForm(files);
     });
   }
 
@@ -78,15 +73,15 @@ export class StudentsUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const students = this.createFromForm();
-    if (students.id !== undefined) {
-      this.subscribeToSaveResponse(this.studentsService.update(students));
+    const files = this.createFromForm();
+    if (files.id !== undefined) {
+      this.subscribeToSaveResponse(this.filesService.update(files));
     } else {
-      this.subscribeToSaveResponse(this.studentsService.create(students));
+      this.subscribeToSaveResponse(this.filesService.create(files));
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IStudents>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IFiles>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -105,32 +100,22 @@ export class StudentsUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(students: IStudents): void {
+  protected updateForm(files: IFiles): void {
     this.editForm.patchValue({
-      id: students.id,
-      studentIdentifier: students.studentIdentifier,
-      studentFirstName: students.studentFirstName,
-      studentLastName: students.studentLastName,
-      dateOfBirth: students.dateOfBirth,
-      schoolYear: students.schoolYear,
-      className: students.className,
-      image: students.image,
-      imageContentType: students.imageContentType,
+      id: files.id,
+      url: files.url,
+      urlContentType: files.urlContentType,
+      description: files.description,
     });
   }
 
-  protected createFromForm(): IStudents {
+  protected createFromForm(): IFiles {
     return {
-      ...new Students(),
+      ...new Files(),
       id: this.editForm.get(['id'])!.value,
-      studentIdentifier: this.editForm.get(['studentIdentifier'])!.value,
-      studentFirstName: this.editForm.get(['studentFirstName'])!.value,
-      studentLastName: this.editForm.get(['studentLastName'])!.value,
-      dateOfBirth: this.editForm.get(['dateOfBirth'])!.value,
-      schoolYear: this.editForm.get(['schoolYear'])!.value,
-      className: this.editForm.get(['className'])!.value,
-      imageContentType: this.editForm.get(['imageContentType'])!.value,
-      image: this.editForm.get(['image'])!.value,
+      urlContentType: this.editForm.get(['urlContentType'])!.value,
+      url: this.editForm.get(['url'])!.value,
+      description: this.editForm.get(['description'])!.value,
     };
   }
 }
