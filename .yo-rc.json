@@ -50,7 +50,7 @@
     "buildTool": "maven",
     "reactive": false,
     "languages": ["en", "fr"],
-    "entities": ["Subjects", "Students", "Profiles", "Appreciations"],
-    "lastLiquibaseTimestamp": 1639167511000
+    "entities": ["Subjects", "Students", "Profiles", "Appreciations", "Files"],
+    "lastLiquibaseTimestamp": 1639839247000
   }
 }

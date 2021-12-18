@@ -27,6 +27,11 @@
     {
       "fieldName": "className",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
     }
   ],
   "relationships": [],
