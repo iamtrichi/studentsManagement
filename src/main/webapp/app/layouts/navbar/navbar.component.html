@@ -1,7 +1,7 @@
 <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-primary">
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
-    <span class="navbar-title">Nizar</span> <span class="navbar-version">{{ version }}</span>
+    <span class="navbar-title">GPS</span> <span class="navbar-version"></span>
   </a>
   <a
     class="navbar-toggler d-lg-none"
@@ -49,7 +49,7 @@
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="collapseNavbar()"
             >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
               <span>Subjects</span>
             </a>
           </li>
@@ -61,7 +61,7 @@
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="collapseNavbar()"
             >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
               <span>Students</span>
             </a>
           </li>
@@ -73,7 +73,7 @@
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="collapseNavbar()"
             >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <fa-icon icon="list" [fixedWidth]="true"></fa-icon>
               <span>Profiles</span>
             </a>
           </li>
@@ -85,7 +85,7 @@
               [routerLinkActiveOptions]="{ exact: true }"
               (click)="collapseNavbar()"
             >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+              <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
               <span>Appreciations</span>
             </a>
           </li>
