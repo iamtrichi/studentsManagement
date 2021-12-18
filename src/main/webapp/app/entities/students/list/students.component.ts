@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IStudents } from '../students.model';
 import { StudentsService } from '../service/students.service';
 import { StudentsDeleteDialogComponent } from '../delete/students-delete-dialog.component';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
   selector: 'jhi-students',
@@ -14,7 +15,7 @@ export class StudentsComponent implements OnInit {
   students?: IStudents[];
   isLoading = false;
 
-  constructor(protected studentsService: StudentsService, protected modalService: NgbModal) {}
+  constructor(protected studentsService: StudentsService, protected dataUtils: DataUtils, protected modalService: NgbModal) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -36,6 +37,14 @@ export class StudentsComponent implements OnInit {
 
   trackId(index: number, item: IStudents): string {
     return item.id!;
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    return this.dataUtils.openFile(base64String, contentType);
   }
 
   delete(students: IStudents): void {
