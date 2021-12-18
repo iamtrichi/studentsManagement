@@ -11,6 +11,11 @@ import { AppreciationsService } from 'app/entities/appreciations/service/appreci
 import { SubjectsService } from 'app/entities/subjects/service/subjects.service';
 import { UserService } from 'app/entities/user/user.service';
 import { LoginService } from 'app/login/login.service';
+import { resourceUsage } from 'process';
+import { IStudents } from 'app/entities/students/students.model';
+import { DataUtils } from 'app/core/util/data-util.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { StudentsDeleteDialogComponent } from 'app/entities/students/delete/students-delete-dialog.component';
 
 @Component({
   selector: 'jhi-home',
@@ -20,7 +25,7 @@ import { LoginService } from 'app/login/login.service';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
-
+  studentsList?: IStudents[];
   obj = {
     appreciations: '---',
     profiles: '---',
@@ -36,13 +41,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     private appreciationsService: AppreciationsService,
     private subjectsService: SubjectsService,
     private usersService: UserService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    protected dataUtils: DataUtils,
+    protected modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     this.studentsService.query().subscribe(
       (res: HttpResponse<any[]>) => {
         this.obj.students = String(res.body ? res.body.length : 0);
+        this.studentsList = res.body ? <any>res.body : this.studentsList;
       },
       () => {
         this.obj.students = 'NaN';
@@ -99,5 +107,28 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
     }
+  }
+
+  trackId(index: number, item: IStudents): string {
+    return item.id!;
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    return this.dataUtils.openFile(base64String, contentType);
+  }
+
+  delete(students: IStudents): void {
+    const modalRef = this.modalService.open(StudentsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.students = students;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.ngOnInit();
+      }
+    });
   }
 }
