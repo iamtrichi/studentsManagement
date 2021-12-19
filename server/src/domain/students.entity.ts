@@ -7,7 +7,7 @@ import { BaseEntity } from './base/base.entity';
  */
 @Entity('students')
 export class Students extends BaseEntity {
-    @Column({ name: 'student_identifier', unique: true })
+    @Column({ name: 'student_identifier' })
     identifier: string;
 
     @Column({ name: 'studentIdentifier', unique: true })

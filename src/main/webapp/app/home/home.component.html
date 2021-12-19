@@ -243,7 +243,7 @@
           </div>
           <!-- end col-->
 
-          <div class="col-md-6 col-xl-3" routerLink="users" style="cursor: pointer">
+          <div class="col-md-6 col-xl-3" routerLink="user-management" style="cursor: pointer">
             <div class="widget-rounded-circle card bg-warning shadow-none">
               <div class="card-body">
                 <div class="row">
@@ -301,13 +301,13 @@
                 <img
                   *ngIf="students.image"
                   [src]="'data:' + students.imageContentType + ';base64,' + students.image"
-                  style="height: 150px; width: 150px"
-                  alt="students image"
+                  style="height: 6em; width: 6em; border: 6px solid #212529; border-radius: 50%"
+                  alt="{{ students.studentFirstName }} {{ students.studentLastName }} image"
                 />
                 <svg
                   *ngIf="!students.image"
                   xmlns="http://www.w3.org/2000/svg"
-                  style="width: 5em; height: 6em ;"
+                  style="width: 6em; height: 6em"
                   fill="currentColor"
                   class="bi bi-person-circle"
                   viewBox="0 0 16 16"
@@ -321,7 +321,7 @@
               </div>
               <div class="card-body" style="text-align: center">
                 <h4 class="card-title">{{ students.studentFirstName }} {{ students.studentLastName }}</h4>
-                <p class="card-text">{{ students.dateOfBirth | formatMediumDate }} {{ students.className }}</p>
+                <p class="card-text">{{ students.dateOfBirth | formatMediumDate }} | {{ students.className }}</p>
                 <button
                   type="submit"
                   [routerLink]="['/students', students.id, 'view']"

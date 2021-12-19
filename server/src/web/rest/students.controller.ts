@@ -45,7 +45,7 @@ export class StudentsController {
             take: +pageRequest.size,
             order: pageRequest.sort.asOrder(),
         });
-        console.log(results);
+        // console.log(results);
         HeaderUtil.addPaginationHeaders(req.res, new Page(results, count, pageRequest));
         return results;
     }

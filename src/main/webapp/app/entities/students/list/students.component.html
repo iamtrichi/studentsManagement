@@ -32,9 +32,9 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
+          <th scope="col"><span>Image</span></th>
           <th scope="col"><span>ID</span></th>
           <th scope="col"><span>Student Identifier</span></th>
-          <th scope="col"><span>Image</span></th>
           <th scope="col"><span>Student First Name</span></th>
           <th scope="col"><span>Student Last Name</span></th>
           <th scope="col"><span>Date Of Birth</span></th>
@@ -46,10 +46,6 @@
       <tbody>
         <tr *ngFor="let students of students; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/students', students.id, 'view']">{{ students.id }}</a>
-          </td>
-          <td>{{ students.studentIdentifier }}</td>
-          <td>
             <a *ngIf="students.image" (click)="openFile(students.image, students.imageContentType)">
               <img
                 [src]="'data:' + students.imageContentType + ';base64,' + students.image"
@@ -59,6 +55,10 @@
             </a>
             <span *ngIf="students.image">{{ students.imageContentType }}, {{ byteSize(students.image) }}</span>
           </td>
+          <td>
+            <a [routerLink]="['/students', students.id, 'view']">{{ students.id }}</a>
+          </td>
+          <td>{{ students.studentIdentifier }}</td>
           <td>{{ students.studentFirstName }}</td>
           <td>{{ students.studentLastName }}</td>
           <td>{{ students.dateOfBirth | formatMediumDate }}</td>

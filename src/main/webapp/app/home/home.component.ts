@@ -11,7 +11,6 @@ import { AppreciationsService } from 'app/entities/appreciations/service/appreci
 import { SubjectsService } from 'app/entities/subjects/service/subjects.service';
 import { UserService } from 'app/entities/user/user.service';
 import { LoginService } from 'app/login/login.service';
-import { resourceUsage } from 'process';
 import { IStudents } from 'app/entities/students/students.model';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
