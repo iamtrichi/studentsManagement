@@ -44,15 +44,18 @@ export class CourseComponent {
       modalRef.componentInstance.course = course;
     }
     modalRef.closed.subscribe(result => {
-      const index = this.courses!.findIndex(
+      if (!this.courses) {
+        this.courses = [];
+      }
+      const index = this.courses.findIndex(
         e => String(e.title).trim().toLocaleLowerCase() === String(result.title).trim().toLocaleLowerCase()
       );
       // eslint-disable-next-line no-console
       console.log(index);
       if (index === -1) {
-        this.courses?.push(result);
+        this.courses.push(result);
       } else {
-        this.courses![index] = result;
+        this.courses[index] = result;
       }
     });
   }
