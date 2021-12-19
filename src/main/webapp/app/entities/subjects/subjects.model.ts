@@ -6,7 +6,7 @@ export interface ISubjects {
 }
 
 export class Subjects implements ISubjects {
-  constructor(public id?: string, public subject?: string, public keywords?: string, public courses?: any[] | null) {}
+  constructor(public id?: string, public subject?: string, public keywords?: string, public courses: any[] | null = []) {}
 }
 
 export function getSubjectsIdentifier(subjects: ISubjects): string | undefined {
