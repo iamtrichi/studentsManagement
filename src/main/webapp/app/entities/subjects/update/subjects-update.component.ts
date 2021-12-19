@@ -90,7 +90,7 @@ export class SubjectsUpdateComponent implements OnInit {
   }
 
   protected updateForm(subjects: ISubjects): void {
-    this.courses = subjects.courses as ICourse[];
+    this.courses = subjects.courses ? (subjects.courses as ICourse[]) : [];
     this.editForm.patchValue({
       id: subjects.id,
       subject: subjects.subject,
