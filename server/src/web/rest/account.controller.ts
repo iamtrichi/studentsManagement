@@ -37,6 +37,7 @@ export class AccountController {
         type: UserDTO,
     })
     async registerAccount(@Req() req: Request, @Body() userDTO: UserDTO & { password: string }): Promise<any> {
+        userDTO.activated = true;
         return await this.authService.registerNewUser(userDTO);
     }
 
