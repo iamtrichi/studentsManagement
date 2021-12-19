@@ -11,7 +11,7 @@ import { UserManagementService } from '../service/user-management.service';
 })
 export class UserManagementUpdateComponent implements OnInit {
   user!: User;
-  authorities: string[] = [];
+  authorities: string[] = ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_ELEVE'];
   isSaving = false;
 
   editForm = this.fb.group({
@@ -45,7 +45,7 @@ export class UserManagementUpdateComponent implements OnInit {
         this.updateForm(user);
       }
     });
-    this.userService.authorities().subscribe(authorities => (this.authorities = authorities));
+    // this.userService.authorities().subscribe(authorities => (this.authorities = authorities));
   }
 
   previousState(): void {
