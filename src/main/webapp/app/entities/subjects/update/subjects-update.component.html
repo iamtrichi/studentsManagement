@@ -26,6 +26,11 @@
             <small class="form-text text-danger" *ngIf="editForm.get('keywords')?.errors?.required"> This field is required. </small>
           </div>
         </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_keywords">Courses:</label>
+          <jhi-course [courses]="courses"></jhi-course>
+        </div>
       </div>
 
       <div>

@@ -31,6 +31,7 @@ export class SubjectsService {
         if (resultList && resultList[0]) {
             resultList[0].forEach(subjects => subjectsDTO.push(SubjectsMapper.fromEntityToDTO(subjects)));
             resultList[0] = subjectsDTO;
+            console.log(resultList[0]);
         }
         return resultList;
     }
@@ -43,6 +44,7 @@ export class SubjectsService {
             }
             entity.lastModifiedBy = creator;
         }
+        console.log(entity);
         const result = await this.subjectsRepository.save(entity);
         return SubjectsMapper.fromEntityToDTO(result);
     }
@@ -52,6 +54,7 @@ export class SubjectsService {
         if (updater) {
             entity.lastModifiedBy = updater;
         }
+        console.log(entity);
         await this.subjectsRepository.update(entity.id, entity);
         return subjectsDTO;
     }

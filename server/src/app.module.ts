@@ -9,6 +9,7 @@ import { StudentsModule } from './module/students.module';
 import { ProfilesModule } from './module/profiles.module';
 import { AppreciationsModule } from './module/appreciations.module';
 import { FilesModule } from './module/files.module';
+import { CourseModule } from './module/course.module';
 // jhipster-needle-add-entity-module-to-main-import - JHipster will import entity modules here, do not remove
 // jhipster-needle-add-controller-module-to-main-import - JHipster will import controller modules here, do not remove
 // jhipster-needle-add-service-module-to-main-import - JHipster will import service modules here, do not remove
@@ -25,6 +26,7 @@ import { FilesModule } from './module/files.module';
         ProfilesModule,
         AppreciationsModule,
         FilesModule,
+        CourseModule,
         // jhipster-needle-add-entity-module-to-main - JHipster will add entity modules here, do not remove
     ],
     controllers: [

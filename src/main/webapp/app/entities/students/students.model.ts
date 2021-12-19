@@ -1,4 +1,5 @@
 import * as dayjs from 'dayjs';
+import { ISubjects } from '../subjects/subjects.model';
 
 export interface IStudents {
   id?: string;
@@ -9,6 +10,7 @@ export interface IStudents {
   schoolYear?: string | null;
   className?: string | null;
   studentName?: string;
+  subjects?: ISubjects[] | null;
   imageContentType?: string | null;
   image?: string | null;
 }
@@ -23,6 +25,7 @@ export class Students implements IStudents {
     public schoolYear?: string | null,
     public className?: string | null,
     public studentName?: string,
+    public subjects?: ISubjects[] | null,
     public imageContentType?: string | null,
     public image?: string | null
   ) {}

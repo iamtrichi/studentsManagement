@@ -268,7 +268,21 @@
           </div>
         </div>
         <!-- end row-->
-        <div class="row" id="entities" *ngIf="studentsList && studentsList.length > 0">
+        <div class="row" id="entities" *ngIf="studentsList && studentsList.length > 0" style="margin-top: 3em">
+          <div class="col col-12">
+            <h3>List of Students:</h3>
+            <div
+              class="input-group"
+              style="position: relative; display: flex; flex-wrap: wrap; align-items: stretch; width: 100%; justify-content: flex-end"
+            >
+              <div class="form-outline" style="display: flex">
+                <input type="search" placeholder="Search..." id="form1" class="form-control" />
+                <button type="button" class="btn btn-primary">
+                  <fa-icon icon="search"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="col col-md-3" *ngFor="let students of studentsList; trackBy: trackId">
             <div class="card" style="width: 100%">
               <div style="cursor: pointer; width: max-content; position: absolute; right: 11px; top: 4px; font-size: x-large">

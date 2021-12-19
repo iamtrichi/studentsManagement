@@ -14,6 +14,7 @@ export class SubjectsMapper {
         fields.forEach(field => {
             entity[field] = entityDTO[field];
         });
+        console.log('entity', entity)
         return entity;
     }
 
@@ -28,7 +29,7 @@ export class SubjectsMapper {
         fields.forEach(field => {
             entityDTO[field] = entity[field];
         });
-
+        console.log('entityDTO', entityDTO)
         return entityDTO;
     }
 }

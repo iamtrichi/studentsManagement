@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <div *ngIf="students">
-      <h2 data-cy="studentsDetailsHeading"><span>Students</span></h2>
+      <h2 data-cy="studentsDetailsHeading"><span>Student info:</span></h2>
 
       <hr />
 
@@ -42,7 +42,11 @@
         <dd>
           <div *ngIf="students.image">
             <a (click)="openFile(students.image, students.imageContentType)">
-              <img [src]="'data:' + students.imageContentType + ';base64,' + students.image" style="max-width: 100%" alt="students image" />
+              <img
+                [src]="'data:' + students.imageContentType + ';base64,' + students.image"
+                style="max-width: 300px; width: min-content"
+                alt="{{ students.studentFirstName }} {{ students.studentLastName }} image"
+              />
             </a>
             {{ students.imageContentType }}, {{ byteSize(students.image) }}
           </div>

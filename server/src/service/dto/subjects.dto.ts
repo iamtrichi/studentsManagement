@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApiModelProperty } from '@nestjs/swagger';
 import { IsNotEmpty, MinLength, MaxLength, Length, Min, Max, Matches } from 'class-validator';
+import { Course } from 'src/domain/course.entity';
 import { BaseDTO } from './base.dto';
+import { CourseDTO } from './course.dto';
 
 /**
  * A SubjectsDTO object.
@@ -15,5 +17,9 @@ export class SubjectsDTO extends BaseDTO {
     @ApiModelProperty({ description: 'keywords field' })
     keywords: string;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    @ApiModelProperty({
+        isArray: true, description: 'Array of courses',
+        required: false
+    })
+    courses: Course[];
 }

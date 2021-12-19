@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <div class="modal-header">
+        <h2 id="jhi-course-heading" data-cy="CourseCreateUpdateHeading">Create or edit a Course</h2>
+      </div>
+      <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_urls">Urls</label>
+          <div>
+            <div *ngIf="editForm.get('urls')!.value" class="form-text text-danger clearfix">
+              <a class="pull-left" (click)="openFile(editForm.get('urls')!.value, editForm.get('urlsContentType')!.value)">open</a><br />
+              <span class="pull-left">{{ editForm.get('urlsContentType')!.value }}, {{ byteSize(editForm.get('urls')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ urls: null }); editForm.patchValue({ urlsContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_urls" data-cy="urls" (change)="setFileData($event, 'urls', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="urls" id="field_urls" data-cy="urls" formControlName="urls" />
+          <input type="hidden" class="form-control" name="urlsContentType" id="field_urlsContentType" formControlName="urlsContentType" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_ctype">Type</label>
+          <select class="form-control" name="ctype" formControlName="ctype" id="field_ctype" data-cy="ctype">
+            <option value="">Select a type</option>
+            <option value="C">Course</option>
+            <option value="A">Application</option>
+            <option value="T">TP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancel()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
