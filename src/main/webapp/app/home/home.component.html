@@ -276,14 +276,14 @@
               style="position: relative; display: flex; flex-wrap: wrap; align-items: stretch; width: 100%; justify-content: flex-end"
             >
               <div class="form-outline" style="display: flex">
-                <input type="search" placeholder="Search..." id="form1" class="form-control" />
+                <input type="search" placeholder="Search..." id="formStudentsList" class="form-control" (change)="filterlist($event)" />
                 <button type="button" class="btn btn-primary">
                   <fa-icon icon="search"></fa-icon>
                 </button>
               </div>
             </div>
           </div>
-          <div class="col col-md-3" *ngFor="let students of studentsList; trackBy: trackId">
+          <div class="col col-md-3" *ngFor="let students of filteredStudentsList; trackBy: trackId">
             <div class="card" style="width: 100%">
               <div style="cursor: pointer; width: max-content; position: absolute; right: 11px; top: 4px; font-size: x-large">
                 <div ngbDropdown class="pointer" display="dynamic" style="position: absolute; right: 11px; top: 4px">
@@ -335,6 +335,7 @@
               </div>
               <div class="card-body" style="text-align: center">
                 <h4 class="card-title">{{ students.studentFirstName }} {{ students.studentLastName }}</h4>
+                <p class="card-text"><fa-icon icon="lock" style="color: cornflowerblue"></fa-icon> {{ students.id }}</p>
                 <p class="card-text">{{ students.dateOfBirth | formatMediumDate }} | {{ students.className }}</p>
                 <button
                   type="submit"
@@ -344,6 +345,15 @@
                 >
                   <fa-icon icon="eye"></fa-icon>
                   <span class="d-none d-md-inline">See Profile</span>
+                </button>
+                <button
+                  type="submit"
+                  [routerLink]="['/students-data', students.id, 'view']"
+                  class="btn btn-primary btn-sm"
+                  data-cy="entityDetailsButton"
+                >
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline">Data</span>
                 </button>
               </div>
             </div>

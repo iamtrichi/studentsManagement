@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   authSubscription?: Subscription;
   studentsList?: IStudents[];
+  filteredStudentsList?: IStudents[];
   obj = {
     appreciations: '---',
     profiles: '---',
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       (res: HttpResponse<any[]>) => {
         this.obj.students = String(res.body ? res.body.length : 0);
         this.studentsList = res.body ? <any>res.body : this.studentsList;
+        this.filteredStudentsList = res.body ? <any>res.body : this.filteredStudentsList;
       },
       () => {
         this.obj.students = 'NaN';
@@ -88,6 +90,22 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     );
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+  }
+
+  filterlist(ev: any): void {
+    // eslint-disable-next-line no-console
+    console.log(ev);
+    const text = ev.srcElement.value;
+    if (text && text.length > 0) {
+      this.filteredStudentsList = this.studentsList?.filter(
+        student =>
+          student.id === text ||
+          (student.studentLastName && student.studentLastName.indexOf(text) >= 0) ||
+          (student.studentFirstName && student.studentFirstName.indexOf(text) >= 0)
+      );
+    } else {
+      this.filteredStudentsList = this.studentsList;
+    }
   }
 
   isAuthenticated(): boolean {
