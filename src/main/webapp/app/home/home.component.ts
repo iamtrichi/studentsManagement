@@ -93,14 +93,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   filterlist(ev: any): void {
-    // eslint-disable-next-line no-console
-    console.log(ev);
     const text = ev.srcElement.value;
     if (text && text.length > 0) {
+      // filter by id, class and name
       this.filteredStudentsList = this.studentsList?.filter(
         student =>
           student.id === text ||
           (student.studentLastName && student.studentLastName.indexOf(text) >= 0) ||
+          (student.className && student.className.indexOf(text) >= 0) ||
           (student.studentFirstName && student.studentFirstName.indexOf(text) >= 0)
       );
     } else {
