@@ -1,0 +1,173 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="students">
+      <h2 data-cy="studentsDetailsHeading"><span>Student data:</span></h2>
+
+      <hr />
+      <ngb-toast header="Success!" *ngIf="saved" (hide)="saved = false"> Student saved successfully </ngb-toast>
+      <ngb-toast header="Error!" *ngIf="error" (hide)="error = false"> Couldn't save student </ngb-toast>
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+      <ngb-accordion #acc="ngbAccordion" activeIds="toggle-student-info, toggle-data-info">
+        <ngb-panel id="toggle-student-info">
+          <ng-template ngbPanelTitle>
+            <span>&#9733; <b>Student info</b> </span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <dl class="row-md jh-entity-details">
+              <dt><span>ID</span></dt>
+              <dd>
+                <span>{{ students.id }}</span>
+              </dd>
+              <dt><span>Student Identifier</span></dt>
+              <dd>
+                <span>{{ students.studentIdentifier }}</span>
+              </dd>
+              <dt><span>Student First Name</span></dt>
+              <dd>
+                <span>{{ students.studentFirstName }}</span>
+              </dd>
+              <dt><span>Student Last Name</span></dt>
+              <dd>
+                <span>{{ students.studentLastName }}</span>
+              </dd>
+              <dt><span>Date Of Birth</span></dt>
+              <dd>
+                <span>{{ students.dateOfBirth | formatMediumDate }}</span>
+              </dd>
+              <dt><span>School Year</span></dt>
+              <dd>
+                <span>{{ students.schoolYear }}</span>
+              </dd>
+              <dt><span>Class Name</span></dt>
+              <dd>
+                <span>{{ students.className }}</span>
+              </dd>
+              <dt><span>Image</span></dt>
+              <dd>
+                <div *ngIf="students.image">
+                  <div style="text-align: center">
+                    <a (click)="openFile(students.image, students.imageContentType)">
+                      <img
+                        [src]="'data:' + students.imageContentType + ';base64,' + students.image"
+                        style="max-width: 300px; width: min-content"
+                        alt="{{ students.studentFirstName }} {{ students.studentLastName }} image"
+                      />
+                    </a>
+                  </div>
+                  {{ students.imageContentType }}, {{ byteSize(students.image) }}
+                </div>
+                <div *ngIf="!students.image" style="text-align: center">
+                  <svg
+                    *ngIf="!students.image"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style="width: 6em; height: 6em"
+                    fill="currentColor"
+                    class="bi bi-person-circle"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path
+                      fill-rule="evenodd"
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                    />
+                  </svg>
+                </div>
+              </dd>
+            </dl>
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="toggle-data-info">
+          <ng-template ngbPanelTitle>
+            <span>&#9733; &#9733;<b> Data</b> </span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <h2>You can do filter all Subjects:</h2>
+
+            <form>
+              <div class="form-group form-inline">Full search: <input class="form-control ml-2" type="text" [formControl]="filter" /></div>
+            </form>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Keywords</th>
+                  <th scope="col">Courses</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let subject of subjects$ | async; index as i">
+                  <th scope="row">{{ subject.id }}</th>
+                  <td>
+                    <ngb-highlight [result]="subject.subject" [term]="filter.value"></ngb-highlight>
+                  </td>
+                  <td><ngb-highlight [result]="subject.keywords" [term]="filter.value"></ngb-highlight></td>
+                  <td>{{ subject?.courses?.length }}</td>
+                  <td>
+                    <div ngbDropdown container="body">
+                      <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle>Move</button>
+                      <div ngbDropdownMenu>
+                        <button ngbDropdownItem (click)="add(subject.id)">Add</button>
+                        <div class="dropdown-divider"></div>
+                        <button ngbDropdownItem (click)="delete(subject.id)">Delete</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <br />
+            <hr />
+            <h2>Students Subject's:</h2>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Keywords</th>
+                  <th scope="col">Courses</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let subject of this.students?.subjects; index as i">
+                  <th scope="row">{{ subject.id }}</th>
+                  <td>
+                    <ngb-highlight [result]="subject.subject" [term]="filter.value"></ngb-highlight>
+                  </td>
+                  <td><ngb-highlight [result]="subject.keywords" [term]="filter.value"></ngb-highlight></td>
+                  <td>{{ subject?.courses?.length }}</td>
+                  <td>
+                    <div ngbDropdown container="body">
+                      <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle>Move</button>
+                      <div ngbDropdownMenu>
+                        <button ngbDropdownItem (click)="delete(subject.id)">Delete</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel title="Disabled" [disabled]="false">
+          <ng-template ngbPanelContent> NEXT STEP... </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/students', students.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

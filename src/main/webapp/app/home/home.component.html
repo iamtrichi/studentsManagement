@@ -1,4 +1,4 @@
-<div class="left-side-menu">
+<div class="left-side-menu" *ngIf="isAuthenticated()">
   <!--- Sidemenu -->
   <div id="sidebar-menu" class="show">
     <ul class="navbar-nav">
@@ -348,7 +348,7 @@
                 </button>
                 <button
                   type="submit"
-                  [routerLink]="['/students-data', students.id, 'view']"
+                  [routerLink]="['/students', students.id, 'data']"
                   class="btn btn-primary btn-sm"
                   data-cy="entityDetailsButton"
                 >

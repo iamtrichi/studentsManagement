@@ -39,5 +39,8 @@ export class StudentsDTO extends BaseDTO {
 
     imageContentType: string;
 
+    @ApiModelProperty({ description: 'subjects field', required: false })
+    subjects: any[];
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 }

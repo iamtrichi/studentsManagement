@@ -6,6 +6,7 @@ import { StudentsComponent } from '../list/students.component';
 import { StudentsDetailComponent } from '../detail/students-detail.component';
 import { StudentsUpdateComponent } from '../update/students-update.component';
 import { StudentsRoutingResolveService } from './students-routing-resolve.service';
+import { StudentsDataComponent } from '../data/students-data.component';
 
 const studentsRoute: Routes = [
   {
@@ -32,6 +33,14 @@ const studentsRoute: Routes = [
   {
     path: ':id/edit',
     component: StudentsUpdateComponent,
+    resolve: {
+      students: StudentsRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':id/data',
+    component: StudentsDataComponent,
     resolve: {
       students: StudentsRoutingResolveService,
     },

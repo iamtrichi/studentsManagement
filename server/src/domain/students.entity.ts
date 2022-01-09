@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Entity, Column } from 'typeorm';
 import { BaseEntity } from './base/base.entity';
+import { Subjects } from './subjects.entity';
 
 /**
  * A Students.
@@ -36,6 +37,9 @@ export class Students extends BaseEntity {
 
     @Column({ name: 'imageContentType', nullable: true })
     imageContentType: string;
+
+    @Column({ name: 'subjects', nullable: false, default: [] })
+    subjects: Subjects[];
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 }

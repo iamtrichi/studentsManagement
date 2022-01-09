@@ -2,6 +2,8 @@ import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
 import { User } from '../domain/user.entity';
 import { transformPassword } from '../security';
 import { Authority } from '../domain/authority.entity';
+import { Students } from 'src/domain/students.entity';
+import { Subjects } from 'src/domain/subjects.entity';
 
 export class SeedUsersRoles1570200490072 implements MigrationInterface {
     role1: Authority = { name: 'ROLE_ADMIN' };
@@ -60,6 +62,27 @@ export class SeedUsersRoles1570200490072 implements MigrationInterface {
         lastModifiedBy: 'system',
     };
 
+    student: Students = {
+        studentFirstName: 'Dhia',
+        schoolYear: '2021-2022',
+        studentName: 'Dhia Ben abdalah',
+        className: '1 année',
+        createdBy: 'SYSTEM',
+        identifier: '1233',
+        studentIdentifier: '1233',
+        studentLastName: 'Ben abdalah',
+        dateOfBirth: new Date('2011-01-01'),
+        image: '',
+        imageContentType: '',
+        subjects: []
+    };
+
+    subject: Subjects = {
+        subject: 'English',
+        keywords: 'Speaking, Reading, Writing',
+        courses: []
+    };
+
     // eslint-disable-next-line
   public async up(queryRunner: QueryRunner): Promise<any> {
         const authorityRepository = getRepository('nhi_authority');
@@ -68,6 +91,16 @@ export class SeedUsersRoles1570200490072 implements MigrationInterface {
         const userRole = await authorityRepository.save(this.role2);
 
         const userRepository = getRepository('nhi_user');
+
+        const studentRepository = getRepository('students');
+
+        const subjectRepository = getRepository('subjects');
+
+        // this.student.subjects.push(this.subject);
+        subjectRepository.save(this.subject);
+        studentRepository.save(this.student);
+
+
 
         this.user1.authorities = [adminRole, userRole];
         this.user3.authorities = [adminRole, userRole];
