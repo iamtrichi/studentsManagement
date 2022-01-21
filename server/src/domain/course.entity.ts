@@ -15,8 +15,24 @@ export class Course extends BaseEntity {
 
     @Column({ name: 'urls_content_type', nullable: true })
     urlsContentType: string;
+
+    @Column({ type: 'blob', name: 'urls1', nullable: true })
+    urls1: any;
+
+    @Column({ name: 'urls1_content_type', nullable: true })
+    urls1ContentType: string;
+
+    @Column({ name: 'note', nullable: true })
+    note: number;
+
+    @Column({ name: 'remarque', nullable: true })
+    remarque: string;
+    
     @Column({ name: 'ctype', nullable: true })
     ctype: string;
+
+    @Column({ type: 'date', name: 'dateActivity', nullable: true })
+    dateActivity: any;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 }

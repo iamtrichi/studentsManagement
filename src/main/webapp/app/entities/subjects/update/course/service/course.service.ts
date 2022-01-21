@@ -6,6 +6,9 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { ICourse, getCourseIdentifier } from '../course.model';
+import { DATE_FORMAT } from 'app/config/input.constants';
+import * as dayjs from 'dayjs';
+import { map } from 'rxjs/operators';
 
 export type EntityResponseType = HttpResponse<ICourse>;
 export type EntityArrayResponseType = HttpResponse<ICourse[]>;
@@ -17,24 +20,38 @@ export class CourseService {
   constructor(protected http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   create(course: ICourse): Observable<EntityResponseType> {
-    return this.http.post<ICourse>(this.resourceUrl, course, { observe: 'response' });
+    const copy = this.convertDateFromClient(course);
+    // return this.http.post<ICourse>(this.resourceUrl, copy, { observe: 'response' });
+    return this.http
+      .post<ICourse>(this.resourceUrl, copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   update(course: ICourse): Observable<EntityResponseType> {
-    return this.http.put<ICourse>(`${this.resourceUrl}/${getCourseIdentifier(course) as string}`, course, { observe: 'response' });
+    const copy = this.convertDateFromClient(course);
+    return this.http
+      .put<ICourse>(`${this.resourceUrl}/${getCourseIdentifier(course) as string}`, copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   partialUpdate(course: ICourse): Observable<EntityResponseType> {
-    return this.http.patch<ICourse>(`${this.resourceUrl}/${getCourseIdentifier(course) as string}`, course, { observe: 'response' });
+    const copy = this.convertDateFromClient(course);
+    return this.http
+      .patch<ICourse>(`${this.resourceUrl}/${getCourseIdentifier(course) as string}`, copy, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   find(id: string): Observable<EntityResponseType> {
-    return this.http.get<ICourse>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    return this.http
+      .get<ICourse>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<ICourse[]>(this.resourceUrl, { params: options, observe: 'response' });
+    return this.http
+      .get<ICourse[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
   delete(id: string): Observable<HttpResponse<{}>> {
@@ -56,5 +73,27 @@ export class CourseService {
       return [...coursesToAdd, ...courseCollection];
     }
     return courseCollection;
+  }
+
+  protected convertDateFromClient(students: ICourse): ICourse {
+    return Object.assign({}, students, {
+      dateActivity: students.dateActivity?.isValid() ? students.dateActivity.format(DATE_FORMAT) : undefined,
+    });
+  }
+
+  protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+    if (res.body) {
+      res.body.dateActivity = res.body.dateActivity ? dayjs(res.body.dateActivity) : undefined;
+    }
+    return res;
+  }
+
+  protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+    if (res.body) {
+      res.body.forEach((students: ICourse) => {
+        students.dateActivity = students.dateActivity ? dayjs(students.dateActivity) : undefined;
+      });
+    }
+    return res;
   }
 }

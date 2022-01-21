@@ -76,6 +76,15 @@
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline">View</span>
               </button>
+              <button
+                type="submit"
+                [routerLink]="['/students', students.id, 'data']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Data</span>
+              </button>
 
               <button
                 type="submit"

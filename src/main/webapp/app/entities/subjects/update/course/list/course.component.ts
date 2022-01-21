@@ -14,7 +14,8 @@ import { CourseDetailComponent } from '../detail/course-detail.component';
 })
 export class CourseComponent {
   isLoading = false;
-  @Input() courses?: ICourse[] = [];
+  @Input() courses?: ICourse[] | null = [];
+  @Input() hideStudentsDetails?: boolean = true;
   constructor(protected courseService: CourseService, protected dataUtils: DataUtils, private modalService: NgbModal) {}
 
   trackId(index: number, item: ICourse): string {
@@ -31,14 +32,16 @@ export class CourseComponent {
 
   openModal(action: string, course?: ICourse): void {
     let modalRef;
-    // eslint-disable-next-line no-console
-    console.log(action, course);
     if (action === 'new') {
       modalRef = this.modalService.open(CourseUpdateComponent, { size: 'lg', backdrop: 'static' });
-      modalRef.componentInstance.course = new Course();
+      course = new Course();
+      course.ctype = 'C';
+      modalRef.componentInstance.hideStudentsDetails = this.hideStudentsDetails;
+      modalRef.componentInstance.course.ctype = course;
     } else if (action === 'edit') {
       modalRef = this.modalService.open(CourseUpdateComponent, { size: 'lg', backdrop: 'static' });
       modalRef.componentInstance.course = course;
+      modalRef.componentInstance.hideStudentsDetails = this.hideStudentsDetails;
     } else {
       modalRef = this.modalService.open(CourseDetailComponent, { size: 'lg', backdrop: 'static' });
       modalRef.componentInstance.course = course;
@@ -60,16 +63,15 @@ export class CourseComponent {
     });
   }
 
-  delete(course: ICourse): void {
+  delete(course: ICourse, i: number): void {
+    // eslint-disable-next-line no-console
+    console.log(this.courses, 'to delete', course);
     const modalRef = this.modalService.open(CourseDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.course = course;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
-        this.courses?.splice(
-          this.courses.findIndex(e => e.id === course.id),
-          1
-        );
+        this.courses?.splice(i, 1);
       }
     });
   }

@@ -1,50 +1,393 @@
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-9">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
       <div class="modal-header">
-        <h2 id="jhi-course-heading" data-cy="CourseCreateUpdateHeading">Create or edit a Course</h2>
+        <h2 id="jhi-course-heading" data-cy="CourseCreateUpdateHeading">Create or edit Notion</h2>
       </div>
       <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
 
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-control-label" for="field_title">Title</label>
+                  <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+                </div>
+                <div id="progressbarwizard">
+                  <ul class="nav nav-pills bg-light nav-justified form-wizard-header mb-3">
+                    <li class="nav-item">
+                      <div #defaultIndex (click)="changeType(0)" class="nav-link rounded-0 pt-2 pb-2" [class.active]="tabIndex == 0">
+                        <i class="mdi mdi-account-circle me-1"></i>
+                        <span class="d-none d-sm-inline">Cours </span>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <div (click)="changeType(1)" class="nav-link rounded-0 pt-2 pb-2" [class.active]="tabIndex == 1">
+                        <i class="mdi mdi-face-profile me-1"></i>
+                        <span class="d-none d-sm-inline">Application </span>
+                      </div>
+                    </li>
+                    <li class="nav-item">
+                      <div (click)="changeType(2)" class="nav-link rounded-0 pt-2 pb-2" [class.active]="tabIndex == 2">
+                        <i class="mdi mdi-checkbox-marked-circle-outline me-1"></i>
+                        <span class="d-none d-sm-inline">Travaux pratique</span>
+                      </div>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content b-0 mb-0 pt-0">
+                    <div id="bar" class="progress mb-3" style="height: 7px">
+                      <div
+                        class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        [style.width]="tabIndex == 0 ? '33.3333%' : tabIndex == 1 ? '66.666%' : '100%'"
+                      ></div>
+                    </div>
+                    <div [ngClass]="{ 'tab-pane active': tabIndex == 0, 'tab-pane': tabIndex != 0 }" id="account-2">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="inputGroupFile01">Fichier</label>
+                            <div class="col-md-9">
+                              <div *ngIf="editForm.get('urls')!.value" class="form-text text-danger clearfix">
+                                <a class="pull-left" (click)="openFile(editForm.get('urls')!.value, editForm.get('urlsContentType')!.value)"
+                                  >open</a
+                                ><br />
+                                <span class="pull-left"
+                                  >{{ editForm.get('urlsContentType')!.value }}, {{ byteSize(editForm.get('urls')!.value) }}</span
+                                >
+                                <button
+                                  type="button"
+                                  (click)="editForm.patchValue({ urls: null }); editForm.patchValue({ urlsContentType: null })"
+                                  class="btn btn-secondary btn-xs pull-right"
+                                >
+                                  <fa-icon icon="times"></fa-icon>
+                                </button>
+                              </div>
+                              <br />
+                              <div class="custom-file">
+                                <input
+                                  type="file"
+                                  class="custom-file-input"
+                                  id="inputGroupFile01"
+                                  data-cy="urls"
+                                  (change)="setFileData($event, 'urls', false)"
+                                />
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                              </div>
+                            </div>
+                            <input type="hidden" class="form-control" name="urls" id="field_urls" data-cy="urls" formControlName="urls" />
+                            <input
+                              type="hidden"
+                              class="form-control"
+                              name="urlsContentType"
+                              id="field_urlsContentType"
+                              formControlName="urlsContentType"
+                            />
+                          </div>
+                          <div class="row mb-3" *ngIf="hideStudentsDetails == false">
+                            <label class="col-md-3 col-form-label" for="cnote"> Noté l’élève</label>
+                            <div class="col-md-9">
+                              <input
+                                type="text"
+                                id="cnote"
+                                name="cnote"
+                                class="form-control"
+                                formControlName="note"
+                                placeholder="10"
+                                min="0"
+                                max="20"
+                                autocomplete="off"
+                                style="
+                                  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==');
+                                  background-repeat: no-repeat;
+                                  background-attachment: scroll;
+                                  background-size: 16px 18px;
+                                  background-position: 98% 50%;
+                                  cursor: auto;
+                                "
+                              />
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="crq">Remarque </label>
+                            <div class="col-md-9">
+                              <input
+                                type="text"
+                                id="crq"
+                                name="crq"
+                                class="form-control"
+                                formControlName="remarque"
+                                placeholder="Remarque"
+                                autocomplete="off"
+                                style="
+                                  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==');
+                                  background-repeat: no-repeat;
+                                  background-attachment: scroll;
+                                  background-size: 16px 18px;
+                                  background-position: 98% 50%;
+                                  cursor: auto;
+                                "
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end col -->
+                      </div>
+                      <!-- end row -->
+                    </div>
+                    <div [ngClass]="{ 'tab-pane active': tabIndex == 1, 'tab-pane': tabIndex != 1 }" id="profile-tab-2">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="inputGroupFile01">Importer fichier IC</label>
+                            <div class="col-md-9">
+                              <div *ngIf="editForm.get('urls')!.value" class="form-text text-danger clearfix">
+                                <a class="pull-left" (click)="openFile(editForm.get('urls')!.value, editForm.get('urlsContentType')!.value)"
+                                  >open</a
+                                ><br />
+                                <span class="pull-left"
+                                  >{{ editForm.get('urlsContentType')!.value }}, {{ byteSize(editForm.get('urls')!.value) }}</span
+                                >
+                                <button
+                                  type="button"
+                                  (click)="editForm.patchValue({ urls: null }); editForm.patchValue({ urlsContentType: null })"
+                                  class="btn btn-secondary btn-xs pull-right"
+                                >
+                                  <fa-icon icon="times"></fa-icon>
+                                </button>
+                              </div>
+                              <br />
+                              <div class="custom-file">
+                                <input
+                                  type="file"
+                                  class="custom-file-input"
+                                  id="inputGroupFile01"
+                                  data-cy="urls"
+                                  (change)="setFileData($event, 'urls', false)"
+                                />
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                              </div>
+                            </div>
+                            <input type="hidden" class="form-control" name="urls" id="field_urls" data-cy="urls" formControlName="urls" />
+                            <input
+                              type="hidden"
+                              class="form-control"
+                              name="urlsContentType"
+                              id="field_urlsContentType"
+                              formControlName="urlsContentType"
+                            />
+                          </div>
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="inputGroupFile02">Importer fichier OC</label>
+                            <div class="col-md-9">
+                              <div *ngIf="editForm.get('urls1')!.value" class="form-text text-danger clearfix">
+                                <a
+                                  class="pull-left"
+                                  (click)="openFile(editForm.get('urls1')!.value, editForm.get('urls1ContentType')!.value)"
+                                  >open</a
+                                ><br />
+                                <span class="pull-left"
+                                  >{{ editForm.get('urls1ContentType')!.value }}, {{ byteSize(editForm.get('urls1')!.value) }}</span
+                                >
+                                <button
+                                  type="button"
+                                  (click)="editForm.patchValue({ urls1: null }); editForm.patchValue({ urls1ContentType: null })"
+                                  class="btn btn-secondary btn-xs pull-right"
+                                >
+                                  <fa-icon icon="times"></fa-icon>
+                                </button>
+                              </div>
+                              <br />
+                              <div class="custom-file">
+                                <input
+                                  type="file"
+                                  class="custom-file-input"
+                                  id="inputGroupFile02"
+                                  data-cy="urls1"
+                                  (change)="setFileData($event, 'urls1', false)"
+                                />
+                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                              </div>
+                            </div>
+                            <input type="hidden" class="form-control" name="urls" id="field_urls" data-cy="urls" formControlName="urls" />
+                            <input
+                              type="hidden"
+                              class="form-control"
+                              name="urlsContentType"
+                              id="field_urlsContentType"
+                              formControlName="urlsContentType"
+                            />
+                          </div>
+                          <div class="row mb-3" *ngIf="hideStudentsDetails == false">
+                            <label class="col-md-3 col-form-label" for="anote"> Noté l’élève</label>
+                            <div class="col-md-9">
+                              <input
+                                type="number"
+                                id="anote"
+                                name="anote"
+                                class="form-control"
+                                formControlName="note"
+                                placeholder="12"
+                                min="0"
+                                max="20"
+                                autocomplete="off"
+                                style="
+                                  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==');
+                                  background-repeat: no-repeat;
+                                  background-attachment: scroll;
+                                  background-size: 16px 18px;
+                                  background-position: 98% 50%;
+                                  cursor: auto;
+                                "
+                              />
+                            </div>
+                          </div>
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="arq">Remarque </label>
+                            <div class="col-md-9">
+                              <input
+                                type="text"
+                                id="arq"
+                                name="arq"
+                                class="form-control"
+                                formControlName="remarque"
+                                placeholder="Remarque"
+                                autocomplete="off"
+                                style="
+                                  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAAAXNSR0IArs4c6QAAAbNJREFUWAntV8FqwkAQnaymUkpChB7tKSfxWCie/Yb+gbdeCqGf0YsQ+hU95QNyDoWCF/HkqdeiIaEUqyZ1ArvodrOHxanQOiCzO28y781skKwFW3scPV1/febP69XqarNeNTB2KGs07U3Ttt/Ozp3bh/u7V7muheQf6ftLUWyYDB5yz1ijuPAub2QRDDunJsdGkAO55KYYjl0OUu1VXOzQZ64Tr+IiPXedGI79bQHdbheCIAD0dUY6gV6vB67rAvo6IxVgWVbFy71KBKkAFaEc2xPQarXA931ot9tyHphiPwpJgSbfe54Hw+EQHMfZ/msVEEURjMfjCjbFeG2dFxPo9/sVOSYzxmAwGIjnTDFRQLMQAjQ5pJAQkCQJ5HlekeERxHEsiE0xUUCzEO9AmqYQhiF0Oh2Yz+ewWCzEY6aYKKBZCAGYs1wuYTabKdNNMWWxnaA4gp3Yry5JBZRlWTXDvaozUgGTyQSyLAP0dbb3DtQlmcan0yngT2ekE9ARc+z4AvC7nauh9iouhpcGamJeX8XF8MaClwaeROWRA7nk+tUnyzGvZrKg0/40gdME/t8EvgG0/NOS6v9NHQAAAABJRU5ErkJggg==');
+                                  background-repeat: no-repeat;
+                                  background-attachment: scroll;
+                                  background-size: 16px 18px;
+                                  background-position: 98% 50%;
+                                  cursor: auto;
+                                "
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end col -->
+                      </div>
+                      <!-- end row -->
+                    </div>
+                    <div [ngClass]="{ 'tab-pane active': tabIndex == 2, 'tab-pane': tabIndex != 2 }" id="finish-2">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="inputGroupFile01">Importer fichier IC</label>
+                            <div class="col-md-9">
+                              <div *ngIf="editForm.get('urls')!.value" class="form-text text-danger clearfix">
+                                <a class="pull-left" (click)="openFile(editForm.get('urls')!.value, editForm.get('urlsContentType')!.value)"
+                                  >open</a
+                                ><br />
+                                <span class="pull-left"
+                                  >{{ editForm.get('urlsContentType')!.value }}, {{ byteSize(editForm.get('urls')!.value) }}</span
+                                >
+                                <button
+                                  type="button"
+                                  (click)="editForm.patchValue({ urls: null }); editForm.patchValue({ urlsContentType: null })"
+                                  class="btn btn-secondary btn-xs pull-right"
+                                >
+                                  <fa-icon icon="times"></fa-icon>
+                                </button>
+                              </div>
+                              <br />
+                              <div class="custom-file">
+                                <input
+                                  type="file"
+                                  class="custom-file-input"
+                                  id="inputGroupFile01"
+                                  data-cy="urls"
+                                  (change)="setFileData($event, 'urls', false)"
+                                />
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                              </div>
+                            </div>
+                            <input type="hidden" class="form-control" name="urls" id="field_urls" data-cy="urls" formControlName="urls" />
+                            <input
+                              type="hidden"
+                              class="form-control"
+                              name="urlsContentType"
+                              id="field_urlsContentType"
+                              formControlName="urlsContentType"
+                            />
+                          </div>
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="inputGroupFile02">Importer fichier OC</label>
+                            <div class="col-md-9">
+                              <div *ngIf="editForm.get('urls1')!.value" class="form-text text-danger clearfix">
+                                <a
+                                  class="pull-left"
+                                  (click)="openFile(editForm.get('urls1')!.value, editForm.get('urls1ContentType')!.value)"
+                                  >open</a
+                                ><br />
+                                <span class="pull-left"
+                                  >{{ editForm.get('urls1ContentType')!.value }}, {{ byteSize(editForm.get('urls1')!.value) }}</span
+                                >
+                                <button
+                                  type="button"
+                                  (click)="editForm.patchValue({ urls1: null }); editForm.patchValue({ urls1ContentType: null })"
+                                  class="btn btn-secondary btn-xs pull-right"
+                                >
+                                  <fa-icon icon="times"></fa-icon>
+                                </button>
+                              </div>
+                              <br />
+                              <div class="custom-file">
+                                <input
+                                  type="file"
+                                  class="custom-file-input"
+                                  id="inputGroupFile02"
+                                  data-cy="urls1"
+                                  (change)="setFileData($event, 'urls1', false)"
+                                />
+                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                              </div>
+                            </div>
+                            <input type="hidden" class="form-control" name="urls" id="field_urls" data-cy="urls" formControlName="urls" />
+                            <input
+                              type="hidden"
+                              class="form-control"
+                              name="urlsContentType"
+                              id="field_urlsContentType"
+                              formControlName="urlsContentType"
+                            />
+                          </div>
+                          <div class="row mb-3">
+                            <label class="col-md-3 col-form-label" for="surname1"> Date d’activité </label>
+                            <div class="col-md-9">
+                              <input type="date" id="inline-datepicker" class="form-control" placeholder="Inline calendar" />
+                            </div>
+                          </div>
+                        </div>
+                        <!-- end col -->
+                      </div>
+                      <!-- end row -->
+                    </div>
+
+                    <!-- <ul class="list-inline mb-0 wizard">
+                                <li class="previous list-inline-item disabled">
+                                    <div (click)="prevTabIndex()" class="btn btn-secondary">Previous</div>
+                                </li>
+                                <li class="next list-inline-item float-end">
+                                    <div (click)="nextTabIndex()" class="btn btn-secondary">Next</div>
+                                </li>
+                            </ul> -->
+                  </div>
+                  <!-- tab-content -->
+                </div>
+                <!-- end #progressbarwizard-->
+              </div>
+              <!-- end card-body -->
+            </div>
+            <!-- end card-->
+          </div>
+          <!-- end col -->
+        </div>
         <div class="form-group" [hidden]="editForm.get('id')!.value == null">
           <label class="form-control-label" for="field_id">ID</label>
           <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="field_title">Title</label>
-          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="field_urls">Urls</label>
-          <div>
-            <div *ngIf="editForm.get('urls')!.value" class="form-text text-danger clearfix">
-              <a class="pull-left" (click)="openFile(editForm.get('urls')!.value, editForm.get('urlsContentType')!.value)">open</a><br />
-              <span class="pull-left">{{ editForm.get('urlsContentType')!.value }}, {{ byteSize(editForm.get('urls')!.value) }}</span>
-              <button
-                type="button"
-                (click)="editForm.patchValue({ urls: null }); editForm.patchValue({ urlsContentType: null })"
-                class="btn btn-secondary btn-xs pull-right"
-              >
-                <fa-icon icon="times"></fa-icon>
-              </button>
-            </div>
-            <input type="file" id="file_urls" data-cy="urls" (change)="setFileData($event, 'urls', false)" />
-          </div>
-          <input type="hidden" class="form-control" name="urls" id="field_urls" data-cy="urls" formControlName="urls" />
-          <input type="hidden" class="form-control" name="urlsContentType" id="field_urlsContentType" formControlName="urlsContentType" />
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="field_ctype">Type</label>
-          <select class="form-control" name="ctype" formControlName="ctype" id="field_ctype" data-cy="ctype">
-            <option value="">Select a type</option>
-            <option value="C">Course</option>
-            <option value="A">Application</option>
-            <option value="T">TP</option>
-          </select>
         </div>
       </div>
 

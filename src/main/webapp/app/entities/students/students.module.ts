@@ -7,9 +7,10 @@ import { StudentsUpdateComponent } from './update/students-update.component';
 import { StudentsDeleteDialogComponent } from './delete/students-delete-dialog.component';
 import { StudentsRoutingModule } from './route/students-routing.module';
 import { StudentsDataComponent } from './data/students-data.component';
+import { SubjectsModule } from '../subjects/subjects.module';
 
 @NgModule({
-  imports: [SharedModule, StudentsRoutingModule],
+  imports: [SharedModule, StudentsRoutingModule, SubjectsModule],
   declarations: [StudentsComponent, StudentsDetailComponent, StudentsUpdateComponent, StudentsDeleteDialogComponent, StudentsDataComponent],
   entryComponents: [StudentsDeleteDialogComponent],
 })

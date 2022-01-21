@@ -24,6 +24,7 @@ import { CourseUpdateComponent } from './update/course/update/course-update.comp
     CourseUpdateComponent,
     CourseDeleteDialogComponent,
   ],
+  exports: [CourseComponent, CourseDetailComponent, CourseUpdateComponent, CourseDeleteDialogComponent],
   entryComponents: [SubjectsDeleteDialogComponent],
   providers: [CourseService],
 })

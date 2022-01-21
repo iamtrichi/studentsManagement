@@ -1,0 +1,19 @@
+.nav > .nav-item > .nav-link.rounded-0.pt-2.pb-2 {
+  font-weight: bolder !important;
+}
+
+.nav > .nav-item > .nav-link.rounded-0.pt-2.pb-2:not(.active) {
+  background-color: #ecf2f5;
+}
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.center {
+  text-align: center;
+  margin: 2em;
+}

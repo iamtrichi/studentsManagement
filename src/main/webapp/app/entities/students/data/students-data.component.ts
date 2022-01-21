@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IStudents } from '../students.model';
 import { DataUtils } from 'app/core/util/data-util.service';
-import { ISubjects } from 'app/entities/subjects/subjects.model';
+import { ISubjects, Subjects } from 'app/entities/subjects/subjects.model';
 import { SubjectsService } from 'app/entities/subjects/service/subjects.service';
 import { HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { finalize, map, startWith } from 'rxjs/operators';
 import { StudentsService } from '../service/students.service';
+import { ICourse } from 'app/entities/subjects/update/course/course.model';
+import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-students-data',
@@ -19,10 +21,15 @@ import { StudentsService } from '../service/students.service';
 export class StudentsDataComponent implements OnInit {
   students: IStudents | null = null;
   saved = false;
+  isSaving = false;
   error = false;
   subjects: ISubjects[] | null = [];
+  selectedSubject: ISubjects;
   subjects$: Observable<ISubjects[] | undefined | null>;
   filter = new FormControl('');
+  @ViewChild('acc')
+  acc!: ElementRef<NgbAccordion>;
+  tabIndex = 0;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -34,6 +41,7 @@ export class StudentsDataComponent implements OnInit {
       startWith(''),
       map(text => this.search(text))
     );
+    this.selectedSubject = new Subjects();
   }
 
   ngOnInit(): void {
@@ -44,11 +52,34 @@ export class StudentsDataComponent implements OnInit {
       (res: HttpResponse<ISubjects[]>) => {
         this.subjects = res.body ? res.body : [];
         this.subjects$ = of(this.subjects);
+
+        // getting setting new courses inside students subjects (not optimal solution, temporary solution)
+
+        this.students?.subjects?.forEach(studentSubject => {
+          const realTimeSubject = this.subjects?.find(s => s.id === studentSubject.id);
+          // eslint-disable-next-line no-console
+          console.log('realTimeSubject', realTimeSubject);
+          if (realTimeSubject) {
+            realTimeSubject.courses?.forEach((course: ICourse) => {
+              if (!studentSubject.courses?.find(el => JSON.stringify(el.title) === JSON.stringify(course.title))) {
+                studentSubject.courses?.push(course);
+              }
+            });
+          }
+        });
       },
       () => {
         this.subjects = [];
       }
     );
+  }
+
+  nextTabIndex(): void {
+    this.tabIndex = this.tabIndex < 3 ? this.tabIndex + 1 : this.tabIndex;
+  }
+
+  prevTabIndex(): void {
+    this.tabIndex = this.tabIndex > 0 ? this.tabIndex - 1 : this.tabIndex;
   }
 
   delete(id: string | undefined): void {
@@ -110,7 +141,22 @@ export class StudentsDataComponent implements OnInit {
     window.history.back();
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IStudents>>): void {
+  notion(subject: ISubjects): void {
+    this.selectedSubject = subject;
+    this.acc.nativeElement.toggle('notion');
+  }
+
+  // save(): void {
+  //   this.isSaving = true;
+  //   const subjects = this.createFromForm();
+  //   if (subjects.id !== undefined) {
+  //     this.subscribeToSaveResponse(this.subjectsService.update(subjects));
+  //   } else {
+  //     this.subscribeToSaveResponse(this.subjectsService.create(subjects));
+  //   }
+  // }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ISubjects>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()
@@ -118,20 +164,14 @@ export class StudentsDataComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.saved = true;
-    setTimeout(() => {
-      this.saved = false;
-    }, 3000);
+    this.previousState();
   }
 
   protected onSaveError(): void {
-    this.error = true;
-    setTimeout(() => {
-      this.error = false;
-    }, 3000);
+    // Api for inheritance.
   }
 
   protected onSaveFinalize(): void {
-    // nothing
+    this.isSaving = false;
   }
 }

@@ -25,24 +25,24 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span>ID</span></th>
           <th scope="col"><span>Title</span></th>
           <th scope="col"><span>Urls</span></th>
           <th scope="col"><span>Ctype</span></th>
+          <th scope="col" *ngIf="hideStudentsDetails == false"><span>Note</span></th>
+          <th scope="col" *ngIf="hideStudentsDetails == false"><span>Remarque</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let course of courses; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a (click)="openModal('view', course)">{{ course.id }}</a>
-          </td>
+        <tr *ngFor="let course of courses; index as i" data-cy="entityTable">
           <td>{{ course.title }}</td>
           <td>
             <a *ngIf="course.urls" (click)="openFile(course.urls, course.urlsContentType)">open</a>
             <span *ngIf="course.urls">{{ course.urlsContentType }}, {{ byteSize(course.urls) }}</span>
           </td>
           <td>{{ course.ctype }}</td>
+          <td *ngIf="hideStudentsDetails == false">{{ course.note }}</td>
+          <td *ngIf="hideStudentsDetails == false">{{ course.remarque }}</td>
           <td class="text-right">
             <div class="btn-group">
               <div (click)="openModal('view', course)" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
@@ -55,7 +55,7 @@
                 <span class="d-none d-md-inline">Edit</span>
               </div>
 
-              <div (click)="delete(course)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <div (click)="delete(course, i)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline">Delete</span>
               </div>

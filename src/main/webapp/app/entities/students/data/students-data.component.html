@@ -9,7 +9,7 @@
       <jhi-alert-error></jhi-alert-error>
 
       <jhi-alert></jhi-alert>
-      <ngb-accordion #acc="ngbAccordion" activeIds="toggle-student-info, toggle-data-info">
+      <ngb-accordion #acc="ngbAccordion" activeIds="toggle-student-info, toggle-data-info, notion">
         <ngb-panel id="toggle-student-info">
           <ng-template ngbPanelTitle>
             <span>&#9733; <b>Student info</b> </span>
@@ -145,8 +145,11 @@
                   <td>{{ subject?.courses?.length }}</td>
                   <td>
                     <div ngbDropdown container="body">
-                      <button class="btn btn-outline-primary btn-sm" ngbDropdownToggle>Move</button>
+                      <button class="btn btn-outline-primary btn-sm" (click)="notion(subject); acc.toggle('toggle-2')" ngbDropdownToggle>
+                        Move
+                      </button>
                       <div ngbDropdownMenu>
+                        <button ngbDropdownItem (click)="notion(subject); acc.toggle('toggle-2')">Notion</button>
                         <button ngbDropdownItem (click)="delete(subject.id)">Delete</button>
                       </div>
                     </div>
@@ -156,18 +159,23 @@
             </table>
           </ng-template>
         </ngb-panel>
-        <ngb-panel title="Disabled" [disabled]="false">
-          <ng-template ngbPanelContent> NEXT STEP... </ng-template>
+        <ngb-panel title="Notions" [disabled]="!selectedSubject.id" id="notion">
+          <ng-template ngbPanelContent>
+            <hr />
+            <h2>Notions of Subject {{ selectedSubject.subject }}:</h2>
+            <hr />
+            <jhi-course [courses]="selectedSubject?.courses" [hideStudentsDetails]="false"></jhi-course>
+          </ng-template>
         </ngb-panel>
       </ngb-accordion>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
-      </button>
+      <div class="center">
+        <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
 
-      <button type="button" [routerLink]="['/students', students.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
-      </button>
+        <button type="button" (click)="save()" class="btn btn-primary"><fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span></button>
+      </div>
     </div>
   </div>
 </div>
