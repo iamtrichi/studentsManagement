@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     subjects: '---',
     users: '--',
   };
+  pageSize = 10;
+  page = 1;
   constructor(
     private accountService: AccountService,
     private router: Router,

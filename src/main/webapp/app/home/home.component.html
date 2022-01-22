@@ -115,7 +115,7 @@
       </div>
       <!-- end page title -->
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
           <div>
             <h1 class="display-4" *ngSwitchCase="false">Welcome, Student managements!</h1>
 
@@ -142,132 +142,108 @@
         </div>
       </div>
       <div *ngSwitchCase="true">
+        <!-- begin cards row -->
+
         <div class="row">
-          <div class="col-md-6 col-xl-3" routerLink="students" style="cursor: pointer">
-            <div class="widget-rounded-circle card bg-primary shadow-none">
+          <div class="col-lg-4">
+            <div class="card">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <div class="avatar-lg rounded-circle bg-soft-light">
-                      <i class="fe-users font-28 avatar-title text-white"></i>
-                    </div>
+                <div class="d-flex align-items-center">
+                  <div class="w-100">
+                    <h3 class="text-muted mt-0">Active users</h3>
+                    <h2 class="mb-0">{{ obj.users | number }}</h2>
                   </div>
-                  <div class="col-10">
-                    <div class="text-end">
-                      <h3 class="text-white mb-0 text-truncate">Total of students:</h3>
-                      <h3 class="text-white mt-2">
-                        <span data-plugin="counterup">{{ obj.students }}</span>
-                      </h3>
-                    </div>
-                  </div>
+                  <i class="mdi mdi-account icon-orange display-3 float-end"></i>
                 </div>
-                <!-- end row-->
+                <p class="text-muted mt-3 mb-3">Total number of active users. Click the link bellow to manage and view more about users.</p>
+                <div routerLink="admin/user-management" style="cursor: pointer">
+                  <a class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
+                  <span class="bg-soft-primary fw-medium text-primary rounded px-2 font-12 py-1">Manage</span>
+                </div>
               </div>
             </div>
-            <!-- end widget-rounded-circle-->
           </div>
-          <!-- end col-->
 
-          <div class="col-md-6 col-xl-3" routerLink="appreciations" style="cursor: pointer">
-            <div class="widget-rounded-circle card bg-success shadow-none">
+          <div class="col-lg-4">
+            <div class="card">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <div class="avatar-lg rounded-circle bg-soft-light">
-                      <i class="fe-bar-chart-line- font-28 avatar-title text-white"></i>
-                    </div>
+                <div class="d-flex align-items-center">
+                  <div class="w-100">
+                    <h3 class="text-muted mt-0">Profiles</h3>
+                    <h2 class="mb-0">{{ obj.profiles | number }}</h2>
                   </div>
-                  <div class="col-6">
-                    <div class="text-end">
-                      <h3 class="text-white mb-0 text-truncate">Total of appreciations:</h3>
-                      <h3 class="text-white mt-2">
-                        <span data-plugin="counterup">{{ obj.appreciations }}</span>
-                      </h3>
-                    </div>
-                  </div>
+                  <i class="mdi mdi-alpha-p-box icon-blue display-3 float-end"></i>
                 </div>
-                <!-- end row-->
+                <p class="text-muted mt-3 mb-3">Total number of profiles. Click the link bellow to manage and view more about profiles.</p>
+                <div routerLink="profiles" style="cursor: pointer">
+                  <a class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
+                  <span class="bg-soft-primary fw-medium text-primary rounded px-2 font-12 py-1">Manage</span>
+                </div>
               </div>
             </div>
-            <!-- end widget-rounded-circle-->
           </div>
-          <!-- end col-->
 
-          <div class="col-md-6 col-xl-3" routerLink="profiles" style="cursor: pointer">
-            <div class="widget-rounded-circle card bg-info shadow-none">
+          <div class="col-lg-4">
+            <div class="card">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <div class="avatar-lg rounded-circle bg-soft-light">
-                      <i class="fe-shuffle font-28 avatar-title text-white"></i>
-                    </div>
+                <div class="d-flex align-items-center">
+                  <div class="w-100">
+                    <h3 class="text-muted mt-0">Subjects</h3>
+                    <h2 class="mb-0">{{ obj.subjects | number }}</h2>
                   </div>
-                  <div class="col-6">
-                    <div class="text-end">
-                      <h3 class="text-white mb-0 text-truncate">Total of profiles:</h3>
-                      <h3 class="text-white mt-2">
-                        <span data-plugin="counterup">{{ obj.profiles }}</span>
-                      </h3>
-                    </div>
-                  </div>
+                  <i class="mdi mdi-book-education text-info display-3 float-end"></i>
                 </div>
-                <!-- end row-->
+                <p class="text-muted mt-3 mb-3">Total number of subjects added.<br />Subject contains a list of Courses (notions).</p>
+                <div routerLink="subjects" style="cursor: pointer">
+                  <a class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
+                  <span class="bg-soft-primary fw-medium text-primary rounded px-2 font-12 py-1">Manage</span>
+                </div>
               </div>
             </div>
-            <!-- end widget-rounded-circle-->
           </div>
-          <!-- end col-->
-
-          <div class="col-md-6 col-xl-3" routerLink="subjects" style="cursor: pointer">
-            <div class="widget-rounded-circle card bg-danger shadow-none">
+          <div class="col-lg-4">
+            <div class="card">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <div class="avatar-lg rounded-circle bg-soft-light">
-                      <i class="fe-download font-28 avatar-title text-white"></i>
-                    </div>
+                <div class="d-flex align-items-center">
+                  <div class="w-100">
+                    <h3 class="text-muted mt-0">Active students</h3>
+                    <h2 class="mb-0">{{ obj.students | number }}</h2>
                   </div>
-                  <div class="col-6">
-                    <div class="text-end">
-                      <h3 class="text-white mb-0 text-truncate">Total of subjects:</h3>
-                      <h3 class="text-white mt-2">
-                        <span data-plugin="counterup">{{ obj.subjects }}</span>
-                      </h3>
-                    </div>
-                  </div>
+                  <i class="mdi mdi-account-supervisor-circle text-success display-3 float-end"></i>
                 </div>
-                <!-- end row-->
+                <p class="text-muted mt-3 mb-3">
+                  Total number of active students. Click the link bellow to manage and view more about students.
+                </p>
+                <div routerLink="students" style="cursor: pointer">
+                  <a class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
+                  <span class="bg-soft-primary fw-medium text-primary rounded px-2 font-12 py-1">Manage</span>
+                </div>
               </div>
             </div>
-            <!-- end widget-rounded-circle-->
           </div>
-          <!-- end col-->
-
-          <div class="col-md-6 col-xl-3" routerLink="admin/user-management" style="cursor: pointer">
-            <div class="widget-rounded-circle card bg-warning shadow-none">
+          <div class="col-lg-4">
+            <div class="card">
               <div class="card-body">
-                <div class="row">
-                  <div class="col-2">
-                    <div class="avatar-lg rounded-circle bg-soft-light">
-                      <i class="fe-users font-28 avatar-title text-white"></i>
-                    </div>
+                <div class="d-flex align-items-center">
+                  <div class="w-100">
+                    <h3 class="text-muted mt-0">Appreciations</h3>
+                    <h2 class="mb-0">{{ obj.appreciations | number }}</h2>
                   </div>
-                  <div class="col-6">
-                    <div class="text-end">
-                      <h3 class="text-white mb-0 text-truncate">Total of users:</h3>
-                      <h3 class="text-white mt-2">
-                        <span data-plugin="counterup">{{ obj.users }}</span>
-                      </h3>
-                    </div>
-                  </div>
+                  <i class="mdi mdi-equalizer display-3 icon-pink float-end"></i>
                 </div>
-                <!-- end row-->
+                <p class="text-muted mt-3 mb-3">
+                  Total number of appreciations. Click the link bellow to manage the list of appreciations and view more about it.
+                </p>
+                <div routerLink="appreciations" style="cursor: pointer">
+                  <a class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
+                  <span class="bg-soft-primary fw-medium text-primary rounded px-2 font-12 py-1">Manage</span>
+                </div>
               </div>
             </div>
-            <!-- end widget-rounded-circle-->
           </div>
         </div>
-        <!-- end row-->
+        <hr />
+        <!-- end cards row -->
         <div class="row" id="entities" *ngIf="studentsList && studentsList.length > 0" style="margin-top: 3em">
           <div class="col col-12">
             <h3>List of Students:</h3>
@@ -1567,382 +1543,9 @@
                   </div>
                 </div>
               </div>
-
-              <div class="col-xl-6 col-lg-12 col-md-6">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-5" style="position: relative">
-                        <div class="apex-charts" id="sparkline-chart-2" style="min-height: 110px">
-                          <div
-                            id="apexcharts71ihqqsq"
-                            class="apexcharts-canvas apexcharts71ihqqsq apexcharts-theme-light"
-                            style="width: 112px; height: 110px"
-                          >
-                            <svg
-                              id="SvgjsSvg3953"
-                              width="112"
-                              height="110"
-                              xmlns="http://www.w3.org/2000/svg"
-                              version="1.1"
-                              xmlns:xlink="http://www.w3.org/1999/xlink"
-                              xmlns:svgjs="http://svgjs.com/svgjs"
-                              class="apexcharts-svg"
-                              xmlns:data="ApexChartsNS"
-                              transform="translate(0, 0)"
-                              style="background: transparent"
-                            >
-                              <g id="SvgjsG3955" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)">
-                                <defs id="SvgjsDefs3954">
-                                  <clipPath id="gridRectMask71ihqqsq">
-                                    <rect
-                                      id="SvgjsRect3961"
-                                      width="118"
-                                      height="112"
-                                      x="-3"
-                                      y="-1"
-                                      rx="0"
-                                      ry="0"
-                                      opacity="1"
-                                      stroke-width="0"
-                                      stroke="none"
-                                      stroke-dasharray="0"
-                                      fill="#fff"
-                                    ></rect>
-                                  </clipPath>
-                                  <clipPath id="gridRectMarkerMask71ihqqsq">
-                                    <rect
-                                      id="SvgjsRect3962"
-                                      width="116"
-                                      height="114"
-                                      x="-2"
-                                      y="-2"
-                                      rx="0"
-                                      ry="0"
-                                      opacity="1"
-                                      stroke-width="0"
-                                      stroke="none"
-                                      stroke-dasharray="0"
-                                      fill="#fff"
-                                    ></rect>
-                                  </clipPath>
-                                  <linearGradient id="SvgjsLinearGradient3967" x1="0" y1="0" x2="0" y2="1">
-                                    <stop id="SvgjsStop3968" stop-opacity="0.45" stop-color="rgba(52,140,212,0.45)" offset="0.5"></stop>
-                                    <stop id="SvgjsStop3969" stop-opacity="0.05" stop-color="rgba(255,255,255,0.05)" offset="1"></stop>
-                                    <stop id="SvgjsStop3970" stop-opacity="0.05" stop-color="rgba(255,255,255,0.05)" offset="1"></stop>
-                                    <stop id="SvgjsStop3971" stop-opacity="0.45" stop-color="rgba(52,140,212,0.45)" offset="1"></stop>
-                                  </linearGradient>
-                                </defs>
-                                <line
-                                  id="SvgjsLine3960"
-                                  x1="0"
-                                  y1="0"
-                                  x2="0"
-                                  y2="110"
-                                  stroke="#b6b6b6"
-                                  stroke-dasharray="3"
-                                  class="apexcharts-xcrosshairs"
-                                  x="0"
-                                  y="0"
-                                  width="1"
-                                  height="110"
-                                  fill="#b1b9c4"
-                                  filter="none"
-                                  fill-opacity="0.9"
-                                  stroke-width="1"
-                                ></line>
-                                <g id="SvgjsG3974" class="apexcharts-xaxis" transform="translate(0, 0)">
-                                  <g id="SvgjsG3975" class="apexcharts-xaxis-texts-g" transform="translate(0, 2.75)"></g>
-                                </g>
-                                <g id="SvgjsG3987" class="apexcharts-grid">
-                                  <g id="SvgjsG3988" class="apexcharts-gridlines-horizontal" style="display: none">
-                                    <line
-                                      id="SvgjsLine3990"
-                                      x1="0"
-                                      y1="0"
-                                      x2="112"
-                                      y2="0"
-                                      stroke="#e0e0e0"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-gridline"
-                                    ></line>
-                                    <line
-                                      id="SvgjsLine3991"
-                                      x1="0"
-                                      y1="22"
-                                      x2="112"
-                                      y2="22"
-                                      stroke="#e0e0e0"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-gridline"
-                                    ></line>
-                                    <line
-                                      id="SvgjsLine3992"
-                                      x1="0"
-                                      y1="44"
-                                      x2="112"
-                                      y2="44"
-                                      stroke="#e0e0e0"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-gridline"
-                                    ></line>
-                                    <line
-                                      id="SvgjsLine3993"
-                                      x1="0"
-                                      y1="66"
-                                      x2="112"
-                                      y2="66"
-                                      stroke="#e0e0e0"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-gridline"
-                                    ></line>
-                                    <line
-                                      id="SvgjsLine3994"
-                                      x1="0"
-                                      y1="88"
-                                      x2="112"
-                                      y2="88"
-                                      stroke="#e0e0e0"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-gridline"
-                                    ></line>
-                                    <line
-                                      id="SvgjsLine3995"
-                                      x1="0"
-                                      y1="110"
-                                      x2="112"
-                                      y2="110"
-                                      stroke="#e0e0e0"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-gridline"
-                                    ></line>
-                                  </g>
-                                  <g id="SvgjsG3989" class="apexcharts-gridlines-vertical" style="display: none"></g>
-                                  <line
-                                    id="SvgjsLine3997"
-                                    x1="0"
-                                    y1="110"
-                                    x2="112"
-                                    y2="110"
-                                    stroke="transparent"
-                                    stroke-dasharray="0"
-                                  ></line>
-                                  <line id="SvgjsLine3996" x1="0" y1="1" x2="0" y2="110" stroke="transparent" stroke-dasharray="0"></line>
-                                </g>
-                                <g id="SvgjsG3963" class="apexcharts-area-series apexcharts-plot-series">
-                                  <g
-                                    id="SvgjsG3964"
-                                    class="apexcharts-series"
-                                    seriesName="SeriesxA"
-                                    data:longestSeries="true"
-                                    rel="1"
-                                    data:realIndex="0"
-                                  >
-                                    <path
-                                      id="SvgjsPath3972"
-                                      d="M 0 110L 0 99C 4.355555555555554 99 8.088888888888889 11 12.444444444444443 11C 16.799999999999997 11 20.53333333333333 77 24.888888888888886 77C 29.24444444444444 77 32.977777777777774 44 37.33333333333333 44C 41.68888888888888 44 45.42222222222222 55 49.77777777777777 55C 54.133333333333326 55 57.86666666666666 11 62.222222222222214 11C 66.57777777777777 11 70.3111111111111 82.5 74.66666666666666 82.5C 79.02222222222221 82.5 82.75555555555555 49.5 87.1111111111111 49.5C 91.46666666666665 49.5 95.19999999999999 77 99.55555555555554 77C 103.9111111111111 77 107.64444444444443 66 111.99999999999999 66C 111.99999999999999 66 111.99999999999999 66 111.99999999999999 110M 111.99999999999999 66z"
-                                      fill="url(#SvgjsLinearGradient3967)"
-                                      fill-opacity="1"
-                                      stroke-opacity="1"
-                                      stroke-linecap="butt"
-                                      stroke-width="0"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-area"
-                                      index="0"
-                                      clip-path="url(#gridRectMask71ihqqsq)"
-                                      pathTo="M 0 110L 0 99C 4.355555555555554 99 8.088888888888889 11 12.444444444444443 11C 16.799999999999997 11 20.53333333333333 77 24.888888888888886 77C 29.24444444444444 77 32.977777777777774 44 37.33333333333333 44C 41.68888888888888 44 45.42222222222222 55 49.77777777777777 55C 54.133333333333326 55 57.86666666666666 11 62.222222222222214 11C 66.57777777777777 11 70.3111111111111 82.5 74.66666666666666 82.5C 79.02222222222221 82.5 82.75555555555555 49.5 87.1111111111111 49.5C 91.46666666666665 49.5 95.19999999999999 77 99.55555555555554 77C 103.9111111111111 77 107.64444444444443 66 111.99999999999999 66C 111.99999999999999 66 111.99999999999999 66 111.99999999999999 110M 111.99999999999999 66z"
-                                      pathFrom="M -1 110L -1 110L 12.444444444444443 110L 24.888888888888886 110L 37.33333333333333 110L 49.77777777777777 110L 62.222222222222214 110L 74.66666666666666 110L 87.1111111111111 110L 99.55555555555554 110L 111.99999999999999 110"
-                                    ></path>
-                                    <path
-                                      id="SvgjsPath3973"
-                                      d="M 0 99C 4.355555555555554 99 8.088888888888889 11 12.444444444444443 11C 16.799999999999997 11 20.53333333333333 77 24.888888888888886 77C 29.24444444444444 77 32.977777777777774 44 37.33333333333333 44C 41.68888888888888 44 45.42222222222222 55 49.77777777777777 55C 54.133333333333326 55 57.86666666666666 11 62.222222222222214 11C 66.57777777777777 11 70.3111111111111 82.5 74.66666666666666 82.5C 79.02222222222221 82.5 82.75555555555555 49.5 87.1111111111111 49.5C 91.46666666666665 49.5 95.19999999999999 77 99.55555555555554 77C 103.9111111111111 77 107.64444444444443 66 111.99999999999999 66"
-                                      fill="none"
-                                      fill-opacity="1"
-                                      stroke="#348cd4"
-                                      stroke-opacity="1"
-                                      stroke-linecap="butt"
-                                      stroke-width="2"
-                                      stroke-dasharray="0"
-                                      class="apexcharts-area"
-                                      index="0"
-                                      clip-path="url(#gridRectMask71ihqqsq)"
-                                      pathTo="M 0 99C 4.355555555555554 99 8.088888888888889 11 12.444444444444443 11C 16.799999999999997 11 20.53333333333333 77 24.888888888888886 77C 29.24444444444444 77 32.977777777777774 44 37.33333333333333 44C 41.68888888888888 44 45.42222222222222 55 49.77777777777777 55C 54.133333333333326 55 57.86666666666666 11 62.222222222222214 11C 66.57777777777777 11 70.3111111111111 82.5 74.66666666666666 82.5C 79.02222222222221 82.5 82.75555555555555 49.5 87.1111111111111 49.5C 91.46666666666665 49.5 95.19999999999999 77 99.55555555555554 77C 103.9111111111111 77 107.64444444444443 66 111.99999999999999 66"
-                                      pathFrom="M -1 110L -1 110L 12.444444444444443 110L 24.888888888888886 110L 37.33333333333333 110L 49.77777777777777 110L 62.222222222222214 110L 74.66666666666666 110L 87.1111111111111 110L 99.55555555555554 110L 111.99999999999999 110"
-                                    ></path>
-                                    <g id="SvgjsG3965" class="apexcharts-series-markers-wrap" data:realIndex="0">
-                                      <g class="apexcharts-series-markers">
-                                        <circle
-                                          id="SvgjsCircle4003"
-                                          r="0"
-                                          cx="0"
-                                          cy="0"
-                                          class="apexcharts-marker wmx4x2u79 no-pointer-events"
-                                          stroke="#ffffff"
-                                          fill="#348cd4"
-                                          fill-opacity="1"
-                                          stroke-width="2"
-                                          stroke-opacity="0.9"
-                                          default-marker-size="0"
-                                        ></circle>
-                                      </g>
-                                    </g>
-                                  </g>
-                                  <g id="SvgjsG3966" class="apexcharts-datalabels" data:realIndex="0"></g>
-                                </g>
-                                <line
-                                  id="SvgjsLine3998"
-                                  x1="0"
-                                  y1="0"
-                                  x2="112"
-                                  y2="0"
-                                  stroke="#b6b6b6"
-                                  stroke-dasharray="0"
-                                  stroke-width="1"
-                                  class="apexcharts-ycrosshairs"
-                                ></line>
-                                <line
-                                  id="SvgjsLine3999"
-                                  x1="0"
-                                  y1="0"
-                                  x2="112"
-                                  y2="0"
-                                  stroke-dasharray="0"
-                                  stroke-width="0"
-                                  class="apexcharts-ycrosshairs-hidden"
-                                ></line>
-                                <g id="SvgjsG4000" class="apexcharts-yaxis-annotations"></g>
-                                <g id="SvgjsG4001" class="apexcharts-xaxis-annotations"></g>
-                                <g id="SvgjsG4002" class="apexcharts-point-annotations"></g>
-                              </g>
-                              <rect
-                                id="SvgjsRect3959"
-                                width="0"
-                                height="0"
-                                x="0"
-                                y="0"
-                                rx="0"
-                                ry="0"
-                                opacity="1"
-                                stroke-width="0"
-                                stroke="none"
-                                stroke-dasharray="0"
-                                fill="#fefefe"
-                              ></rect>
-                              <g id="SvgjsG3986" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g>
-                              <g id="SvgjsG3956" class="apexcharts-annotations"></g>
-                            </svg>
-                            <div class="apexcharts-legend" style="max-height: 55px"></div>
-                            <div class="apexcharts-tooltip apexcharts-theme-light">
-                              <div
-                                class="apexcharts-tooltip-title"
-                                style="font-family: Helvetica, Arial, sans-serif; font-size: 12px"
-                              ></div>
-                              <div class="apexcharts-tooltip-series-group" style="order: 1">
-                                <span class="apexcharts-tooltip-marker" style="background-color: rgb(52, 140, 212)"></span>
-                                <div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px">
-                                  <div class="apexcharts-tooltip-y-group">
-                                    <span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span>
-                                  </div>
-                                  <div class="apexcharts-tooltip-z-group">
-                                    <span class="apexcharts-tooltip-text-z-label"></span
-                                    ><span class="apexcharts-tooltip-text-z-value"></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"
-                            >
-                              <div class="apexcharts-yaxistooltip-text"></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="resize-triggers">
-                          <div class="expand-trigger"><div style="width: 137px; height: 111px"></div></div>
-                          <div class="contract-trigger"></div>
-                        </div>
-                      </div>
-                      <div class="col-6 offset-1">
-                        <div class="text-end">
-                          <p class="font-14 mb-1">Active Users</p>
-                          <h2 class="fw-bold mb-0">50.24K</h2>
-                          <h5 class="mb-0 text-success"><i class="mdi mdi-trending-up font-18 me-1"></i>20.7%</h5>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-        <!-- end row -->
-
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="text-muted mt-0">Active Users</h5>
-                    <h2 class="mb-0">24,600</h2>
-                  </div>
-                  <i class="mdi mdi-account text-light display-3 float-end"></i>
-                </div>
-                <p class="text-muted mt-3 mb-3">
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut ratione voluptate msequi nesciunt.
-                </p>
-                <div>
-                  <a href="#" class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
-                  <span class="bg-soft-primary fw-medium text-primary rounded px-2 font-12 py-1">Excellent</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="text-muted mt-0">Business Profile</h5>
-                    <h2 class="mb-0">$40,340</h2>
-                  </div>
-                  <i class="mdi mdi-office-building text-light display-3 float-end"></i>
-                </div>
-                <p class="text-muted mt-3 mb-3">
-                  Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.
-                </p>
-                <div>
-                  <a href="#" class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
-                  <span class="bg-soft-warning fw-medium text-warning rounded px-2 font-12 py-1">Excellent</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex align-items-center">
-                  <div class="w-100">
-                    <h5 class="text-muted mt-0">Market Price</h5>
-                    <h2 class="mb-0">$1,180</h2>
-                  </div>
-                  <i class="mdi mdi-database-marker text-light display-3 float-end"></i>
-                </div>
-                <p class="text-muted mt-3 mb-3">
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.
-                </p>
-                <div>
-                  <a href="#" class="text-primary float-end"><i class="mdi mdi-arrow-right font-20"></i></a>
-                  <span class="bg-soft-pink fw-medium text-pink rounded px-2 font-12 py-1">Excellent</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end row -->
 
         <div class="row">
           <div class="col-xl-6">
@@ -1964,63 +1567,37 @@
                   </div>
                 </div>
 
-                <h4 class="header-title mb-3">Recent Product</h4>
+                <h4 class="header-title mb-3">Students Data:</h4>
 
                 <div class="table-responsive">
                   <table class="table table-hover table-centered mb-0">
                     <thead>
                       <tr>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
+                        <th>Full Name</th>
+                        <th>Subjects</th>
+                        <th>Notions</th>
                         <th>Status</th>
-                        <th>Amount</th>
+                        <th>Best</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>ASOS Ridley High Waist</td>
-                        <td>$79.49</td>
-                        <td>82</td>
-                        <td><span class="badge text-success border border-success">Active</span></td>
-                        <td>$6,518.18</td>
-                      </tr>
-                      <tr>
-                        <td>Marco Lightweight Shirt</td>
-                        <td>$128.50</td>
-                        <td>37</td>
-                        <td><span class="badge text-warning border border-warning">Pending</span></td>
-                        <td>$4,754.50</td>
-                      </tr>
-                      <tr>
-                        <td>Half Sleeve Shirt</td>
-                        <td>$39.99</td>
-                        <td>64</td>
-                        <td><span class="badge text-primary border border-primary">Done</span></td>
-                        <td>$2,559.36</td>
-                      </tr>
-                      <tr>
-                        <td>Lightweight Jacket</td>
-                        <td>$20.00</td>
-                        <td>184</td>
-                        <td><span class="badge text-info border border-info">Progress</span></td>
-                        <td>$3,680.00</td>
-                      </tr>
-                      <tr>
-                        <td>Marco Shoes</td>
-                        <td>$28.49</td>
-                        <td>69</td>
-                        <td><span class="badge text-warning border border-warning">Pending</span></td>
-                        <td>$1,965.81</td>
-                      </tr>
-                      <tr>
-                        <td>ASOS Ridley High Waist</td>
-                        <td>$79.49</td>
-                        <td>82</td>
-                        <td><span class="badge text-primary border border-primary">Done</span></td>
-                        <td>$6,518.18</td>
+                      <tr *ngFor="let student of studentsList | slice: (page - 1) * pageSize:page * pageSize; trackBy: trackId">
+                        <td [routerLink]="['/students', student.id, 'data']" style="cursor: pointer; font-weight: 900" class="text-primary">
+                          {{ student.studentName }}
+                        </td>
+                        <td>{{ student?.subjects?.length }}</td>
+                        <td>{{ student.subjects | notions }}</td>
+                        <td><div [innerHTML]="student.subjects | notions: 'status'"></div></td>
+                        <td><div [innerHTML]="student.subjects | notions: 'best'"></div></td>
                       </tr>
                     </tbody>
+                    <caption>
+                      <ngb-pagination
+                        [(page)]="page"
+                        [pageSize]="pageSize"
+                        [collectionSize]="studentsList ? studentsList.length : 0"
+                      ></ngb-pagination>
+                    </caption>
                   </table>
                 </div>
                 <!-- end table responsive-->
