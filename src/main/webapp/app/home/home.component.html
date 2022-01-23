@@ -338,7 +338,7 @@
         <hr />
 
         <div class="row">
-          <div class="col-xl-6">
+          <div class="col-xl-9">
             <div class="card">
               <div class="card-body">
                 <h4 class="header-title mb-3">Students Data:</h4>
@@ -419,21 +419,12 @@
               </div>
             </div>
           </div>
-          <div class="col-xl-3 col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="header-title mb-3">Total Users</h4>
-                <!-- pie -->
-                <canvas #pieCanvas style="height: 20vh"></canvas>
-              </div>
-            </div>
-          </div>
         </div>
         <!-- end row -->
 
         <div class="row">
           <!-- end col-->
-          <div class="col-lg-8">
+          <div class="col-lg-9">
             <div class="card">
               <div class="card-body">
                 <h4 class="header-title mb-3">Top 5 grades</h4>
@@ -453,6 +444,7 @@
                           [type]="gradesColors[i]"
                           [value]="bestGrade.note"
                           [max]="20"
+                          height="20px"
                           [showValue]="true"
                           [striped]="false"
                         ></ngb-progressbar>
@@ -460,6 +452,15 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="header-title mb-3">Total Users</h4>
+                <!-- pie -->
+                <canvas #pieCanvas style="height: 20vh"></canvas>
               </div>
             </div>
           </div>
