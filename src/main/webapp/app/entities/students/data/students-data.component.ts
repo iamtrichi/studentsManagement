@@ -164,7 +164,7 @@ export class StudentsDataComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    // this.previousState();
   }
 
   protected onSaveError(): void {
