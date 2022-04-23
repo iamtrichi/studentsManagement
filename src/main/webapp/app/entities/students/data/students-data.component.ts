@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IStudents } from '../students.model';
@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 import { finalize, map, startWith } from 'rxjs/operators';
 import { StudentsService } from '../service/students.service';
 import { ICourse } from 'app/entities/subjects/update/course/course.model';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import Stepper from 'bs-stepper';
 
 @Component({
   selector: 'jhi-students-data',
@@ -27,9 +27,8 @@ export class StudentsDataComponent implements OnInit {
   selectedSubject: ISubjects;
   subjects$: Observable<ISubjects[] | undefined | null>;
   filter = new FormControl('');
-  @ViewChild('acc')
-  acc!: ElementRef<NgbAccordion>;
   tabIndex = 0;
+  private stepper: Stepper | undefined;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -45,6 +44,12 @@ export class StudentsDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.stepper = new Stepper(window.document.querySelector('#stepper1') as Element, {
+        linear: false,
+        animation: true,
+      });
+    }, 2000);
     this.activatedRoute.data.subscribe(({ students }) => {
       this.students = students;
     });
@@ -141,9 +146,31 @@ export class StudentsDataComponent implements OnInit {
     window.history.back();
   }
 
+  next(): void {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    if ((this.stepper as any)._currentIndex === 1) {
+      // test for selectedSubject befor navigating to notions
+      if (this.selectedSubject.id) {
+        this.stepper?.next();
+      } else {
+        // should throw error message.
+      }
+    } else {
+      this.stepper?.next();
+    }
+  }
+
+  back(): void {
+    this.stepper?.previous();
+  }
+
+  onSubmit(): void {
+    // onSubmit
+  }
+
   notion(subject: ISubjects): void {
     this.selectedSubject = subject;
-    this.acc.nativeElement.toggle('notion');
+    this.next();
   }
 
   // save(): void {

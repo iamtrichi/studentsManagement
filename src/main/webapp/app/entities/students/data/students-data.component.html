@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="col-10">
     <div *ngIf="students">
       <h2 data-cy="studentsDetailsHeading"><span>Student data:</span></h2>
 
@@ -9,12 +9,31 @@
       <jhi-alert-error></jhi-alert-error>
 
       <jhi-alert></jhi-alert>
-      <ngb-accordion #acc="ngbAccordion" activeIds="toggle-student-info, toggle-data-info, notion">
-        <ngb-panel id="toggle-student-info">
-          <ng-template ngbPanelTitle>
-            <span>&#9733; <b>Student info</b> </span>
-          </ng-template>
-          <ng-template ngbPanelContent>
+      <div id="stepper1" class="bs-stepper">
+        <div class="bs-stepper-header">
+          <div class="step" data-target="#test-l-1">
+            <button class="step-trigger">
+              <span class="bs-stepper-circle">1</span>
+              <span class="bs-stepper-label">Student Data</span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#test-l-2">
+            <button class="step-trigger">
+              <span class="bs-stepper-circle">2</span>
+              <span class="bs-stepper-label">Subjects</span>
+            </button>
+          </div>
+          <div class="line"></div>
+          <div class="step" data-target="#test-l-3">
+            <button class="step-trigger">
+              <span class="bs-stepper-circle">3</span>
+              <span class="bs-stepper-label">Notions</span>
+            </button>
+          </div>
+        </div>
+        <div class="bs-stepper-content">
+          <div id="test-l-1" class="content text-center">
             <dl class="row-md jh-entity-details">
               <dt><span>ID</span></dt>
               <dd>
@@ -76,13 +95,9 @@
                 </div>
               </dd>
             </dl>
-          </ng-template>
-        </ngb-panel>
-        <ngb-panel id="toggle-data-info">
-          <ng-template ngbPanelTitle>
-            <span>&#9733; &#9733;<b> Data</b> </span>
-          </ng-template>
-          <ng-template ngbPanelContent>
+            <button (click)="next()" class="btn btn-primary">&nbsp;Next step</button>
+          </div>
+          <div id="test-l-2" class="content text-center">
             <h2>You can do filter all Subjects:</h2>
 
             <form>
@@ -145,11 +160,9 @@
                   <td>{{ subject?.courses?.length }}</td>
                   <td>
                     <div ngbDropdown container="body">
-                      <button class="btn btn-outline-primary btn-sm" (click)="notion(subject); acc.toggle('toggle-2')" ngbDropdownToggle>
-                        Move
-                      </button>
+                      <button class="btn btn-outline-primary btn-sm" (click)="notion(subject); next()" ngbDropdownToggle>Move</button>
                       <div ngbDropdownMenu>
-                        <button ngbDropdownItem (click)="notion(subject); acc.toggle('toggle-2')">Notion</button>
+                        <button ngbDropdownItem (click)="notion(subject); next()">Notion</button>
                         <button ngbDropdownItem (click)="delete(subject.id)">Delete</button>
                       </div>
                     </div>
@@ -157,24 +170,23 @@
                 </tr>
               </tbody>
             </table>
-          </ng-template>
-        </ngb-panel>
-        <ngb-panel title="Notions" [disabled]="!selectedSubject.id" id="notion">
-          <ng-template ngbPanelContent>
+            <button (click)="back()" class="btn btn-primary">&nbsp;Previous step</button>
+            <button (click)="next()" class="btn btn-primary">&nbsp;Next step</button>
+          </div>
+          <div id="test-l-3" class="content text-center">
             <hr />
             <h2>Notions of Subject {{ selectedSubject.subject }}:</h2>
             <hr />
             <jhi-course [courses]="selectedSubject?.courses" [hideStudentsDetails]="false"></jhi-course>
-          </ng-template>
-        </ngb-panel>
-      </ngb-accordion>
+            <div class="center">
+              <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+              </button>
 
-      <div class="center">
-        <button type="button" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
-        </button>
-
-        <button type="button" (click)="save()" class="btn btn-primary"><fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span></button>
+              <button type="button" (click)="save()" class="btn btn-success"><fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
