@@ -41,7 +41,11 @@ describe('Files Controller', () => {
     });
 
     it('/GET all files ', async () => {
-        const getEntities: FilesDTO[] = (await request(app.getHttpServer()).get('/api/files').expect(200)).body;
+        const getEntities: FilesDTO[] = (
+            await request(app.getHttpServer())
+                .get('/api/files')
+                .expect(200)
+        ).body;
 
         expect(getEntities).toEqual(entityMock);
     });
@@ -58,7 +62,10 @@ describe('Files Controller', () => {
 
     it('/POST create files', async () => {
         const createdEntity: FilesDTO = (
-            await request(app.getHttpServer()).post('/api/files').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .post('/api/files')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(createdEntity).toEqual(entityMock);
@@ -66,7 +73,10 @@ describe('Files Controller', () => {
 
     it('/PUT update files', async () => {
         const updatedEntity: FilesDTO = (
-            await request(app.getHttpServer()).put('/api/files').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .put('/api/files')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(updatedEntity).toEqual(entityMock);

@@ -17,7 +17,6 @@ export class StudentsMapper {
         // delete entity.studentIdentifier;
         entity.identifier = entityDTO.studentIdentifier;
         // entity.studentIdentifier = entityDTO.studentIdentifier;
-        console.log(entity);
         return entity;
     }
 

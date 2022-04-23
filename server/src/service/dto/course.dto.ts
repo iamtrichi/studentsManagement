@@ -29,7 +29,6 @@ export class CourseDTO extends BaseDTO {
 
     @ApiModelProperty({ description: 'activity date field', required: false })
     dateActivity: string;
-    
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 }

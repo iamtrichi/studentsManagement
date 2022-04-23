@@ -18,8 +18,9 @@ export class SubjectsDTO extends BaseDTO {
     keywords: string;
 
     @ApiModelProperty({
-        isArray: true, description: 'Array of courses',
-        required: false
+        isArray: true,
+        description: 'Array of courses',
+        required: false,
     })
     courses: Course[];
 }

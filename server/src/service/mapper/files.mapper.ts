@@ -9,9 +9,9 @@ export class FilesMapper {
         if (!entityDTO) {
             return;
         }
-        let entity = new Files();
+        const entity = new Files();
         const fields = Object.getOwnPropertyNames(entityDTO);
-        fields.forEach((field) => {
+        fields.forEach(field => {
             entity[field] = entityDTO[field];
         });
         return entity;
@@ -21,11 +21,11 @@ export class FilesMapper {
         if (!entity) {
             return;
         }
-        let entityDTO = new FilesDTO();
+        const entityDTO = new FilesDTO();
 
         const fields = Object.getOwnPropertyNames(entity);
 
-        fields.forEach((field) => {
+        fields.forEach(field => {
             entityDTO[field] = entity[field];
         });
 

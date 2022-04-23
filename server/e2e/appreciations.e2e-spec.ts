@@ -42,7 +42,9 @@ describe('Appreciations Controller', () => {
 
     it('/GET all appreciations ', async () => {
         const getEntities: AppreciationsDTO[] = (
-            await request(app.getHttpServer()).get('/api/appreciations').expect(200)
+            await request(app.getHttpServer())
+                .get('/api/appreciations')
+                .expect(200)
         ).body;
 
         expect(getEntities).toEqual(entityMock);
@@ -60,7 +62,10 @@ describe('Appreciations Controller', () => {
 
     it('/POST create appreciations', async () => {
         const createdEntity: AppreciationsDTO = (
-            await request(app.getHttpServer()).post('/api/appreciations').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .post('/api/appreciations')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(createdEntity).toEqual(entityMock);
@@ -68,7 +73,10 @@ describe('Appreciations Controller', () => {
 
     it('/PUT update appreciations', async () => {
         const updatedEntity: AppreciationsDTO = (
-            await request(app.getHttpServer()).put('/api/appreciations').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .put('/api/appreciations')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(updatedEntity).toEqual(entityMock);

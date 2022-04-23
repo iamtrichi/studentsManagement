@@ -16,7 +16,6 @@ export class Subjects extends BaseEntity {
 
     @Column()
     courses: Course[];
-    
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 }

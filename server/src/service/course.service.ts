@@ -29,7 +29,7 @@ export class CourseService {
         const resultList = await this.courseRepository.findAndCount(options);
         const courseDTO: CourseDTO[] = [];
         if (resultList && resultList[0]) {
-            resultList[0].forEach((course) => courseDTO.push(CourseMapper.fromEntityToDTO(course)));
+            resultList[0].forEach(course => courseDTO.push(CourseMapper.fromEntityToDTO(course)));
             resultList[0] = courseDTO;
         }
         return resultList;
