@@ -6,12 +6,13 @@ import { DataUtils } from 'app/core/util/data-util.service';
 import { ISubjects, Subjects } from 'app/entities/subjects/subjects.model';
 import { SubjectsService } from 'app/entities/subjects/service/subjects.service';
 import { HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { finalize, map, startWith } from 'rxjs/operators';
 import { StudentsService } from '../service/students.service';
 import { ICourse } from 'app/entities/subjects/update/course/course.model';
 import Stepper from 'bs-stepper';
+import { KeyPadService } from 'app/core/util/key-pad.service';
 
 @Component({
   selector: 'jhi-students-data',
@@ -28,19 +29,25 @@ export class StudentsDataComponent implements OnInit {
   subjects$: Observable<ISubjects[] | undefined | null>;
   filter = new FormControl('');
   tabIndex = 0;
+  subscription: Subscription;
   private stepper: Stepper | undefined;
 
   constructor(
     protected dataUtils: DataUtils,
     protected activatedRoute: ActivatedRoute,
     protected studentsService: StudentsService,
-    private subjectsService: SubjectsService
+    private subjectsService: SubjectsService,
+    private keyPadService: KeyPadService
   ) {
     this.subjects$ = this.filter.valueChanges.pipe(
       startWith(''),
       map(text => this.search(text))
     );
     this.selectedSubject = new Subjects();
+    this.subscription = this.keyPadService.getKeyCode().subscribe(result => {
+      // eslint-disable-next-line no-console
+      console.log('Received ', result);
+    });
   }
 
   ngOnInit(): void {
