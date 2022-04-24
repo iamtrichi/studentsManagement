@@ -27,7 +27,7 @@ export class Course extends BaseEntity {
 
     @Column({ name: 'remarque', nullable: true })
     remarque: string;
-    
+
     @Column({ name: 'ctype', nullable: true })
     ctype: string;
 

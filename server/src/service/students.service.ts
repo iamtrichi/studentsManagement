@@ -45,7 +45,6 @@ export class StudentsService {
         }
         const copy = JSON.parse(JSON.stringify(entity));
         delete copy.image;
-        console.log('saving', copy);
         const result = await this.studentsRepository.save(entity);
         return StudentsMapper.fromEntityToDTO(result);
     }
@@ -57,7 +56,6 @@ export class StudentsService {
         }
         const copy = JSON.parse(JSON.stringify(entity));
         delete copy.image;
-        console.log('saving', copy);
         await this.studentsRepository.update(entity.id, entity);
         return studentsDTO;
     }

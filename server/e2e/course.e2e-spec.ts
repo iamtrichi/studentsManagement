@@ -41,7 +41,11 @@ describe('Course Controller', () => {
     });
 
     it('/GET all courses ', async () => {
-        const getEntities: CourseDTO[] = (await request(app.getHttpServer()).get('/api/courses').expect(200)).body;
+        const getEntities: CourseDTO[] = (
+            await request(app.getHttpServer())
+                .get('/api/courses')
+                .expect(200)
+        ).body;
 
         expect(getEntities).toEqual(entityMock);
     });
@@ -58,7 +62,10 @@ describe('Course Controller', () => {
 
     it('/POST create courses', async () => {
         const createdEntity: CourseDTO = (
-            await request(app.getHttpServer()).post('/api/courses').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .post('/api/courses')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(createdEntity).toEqual(entityMock);
@@ -66,7 +73,10 @@ describe('Course Controller', () => {
 
     it('/PUT update courses', async () => {
         const updatedEntity: CourseDTO = (
-            await request(app.getHttpServer()).put('/api/courses').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .put('/api/courses')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(updatedEntity).toEqual(entityMock);

@@ -29,7 +29,7 @@ export class FilesService {
         const resultList = await this.filesRepository.findAndCount(options);
         const filesDTO: FilesDTO[] = [];
         if (resultList && resultList[0]) {
-            resultList[0].forEach((files) => filesDTO.push(FilesMapper.fromEntityToDTO(files)));
+            resultList[0].forEach(files => filesDTO.push(FilesMapper.fromEntityToDTO(files)));
             resultList[0] = filesDTO;
         }
         return resultList;

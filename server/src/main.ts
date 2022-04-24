@@ -30,8 +30,8 @@ async function bootstrap(): Promise<void> {
         logger.log('No client it has been found');
     }
     setupSwagger(app);
-    app.use(bodyParser.json({limit: '50mb'}));
-    app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+    app.use(bodyParser.json({ limit: '50mb' }));
+    app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
     await app.listen(port);
     logger.log(`Application listening on port ${port}`);
 }

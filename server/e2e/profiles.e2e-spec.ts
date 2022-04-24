@@ -41,7 +41,11 @@ describe('Profiles Controller', () => {
     });
 
     it('/GET all profiles ', async () => {
-        const getEntities: ProfilesDTO[] = (await request(app.getHttpServer()).get('/api/profiles').expect(200)).body;
+        const getEntities: ProfilesDTO[] = (
+            await request(app.getHttpServer())
+                .get('/api/profiles')
+                .expect(200)
+        ).body;
 
         expect(getEntities).toEqual(entityMock);
     });
@@ -58,7 +62,10 @@ describe('Profiles Controller', () => {
 
     it('/POST create profiles', async () => {
         const createdEntity: ProfilesDTO = (
-            await request(app.getHttpServer()).post('/api/profiles').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .post('/api/profiles')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(createdEntity).toEqual(entityMock);
@@ -66,7 +73,10 @@ describe('Profiles Controller', () => {
 
     it('/PUT update profiles', async () => {
         const updatedEntity: ProfilesDTO = (
-            await request(app.getHttpServer()).put('/api/profiles').send(entityMock).expect(201)
+            await request(app.getHttpServer())
+                .put('/api/profiles')
+                .send(entityMock)
+                .expect(201)
         ).body;
 
         expect(updatedEntity).toEqual(entityMock);

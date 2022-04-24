@@ -74,13 +74,13 @@ export class SeedUsersRoles1570200490072 implements MigrationInterface {
         dateOfBirth: new Date('2011-01-01'),
         image: '',
         imageContentType: '',
-        subjects: []
+        subjects: [],
     };
 
     subject: Subjects = {
         subject: 'English',
         keywords: 'Speaking, Reading, Writing',
-        courses: []
+        courses: [],
     };
 
     // eslint-disable-next-line
@@ -99,8 +99,6 @@ export class SeedUsersRoles1570200490072 implements MigrationInterface {
         // this.student.subjects.push(this.subject);
         subjectRepository.save(this.subject);
         studentRepository.save(this.student);
-
-
 
         this.user1.authorities = [adminRole, userRole];
         this.user3.authorities = [adminRole, userRole];
