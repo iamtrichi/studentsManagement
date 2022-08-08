@@ -32,7 +32,7 @@ export class AppreciationsController {
     constructor(private readonly appreciationsService: AppreciationsService) {}
 
     @Get('/')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'List all records',
@@ -50,7 +50,7 @@ export class AppreciationsController {
     }
 
     @Get('/:id')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'The found record',
@@ -61,7 +61,7 @@ export class AppreciationsController {
     }
 
     @PostMethod('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Create appreciations' })
     @ApiResponse({
         status: 201,
@@ -76,7 +76,7 @@ export class AppreciationsController {
     }
 
     @Put('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update appreciations' })
     @ApiResponse({
         status: 200,
@@ -89,7 +89,7 @@ export class AppreciationsController {
     }
 
     @Put('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update appreciations with id' })
     @ApiResponse({
         status: 200,
@@ -102,7 +102,7 @@ export class AppreciationsController {
     }
 
     @Delete('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Delete appreciations' })
     @ApiResponse({
         status: 204,

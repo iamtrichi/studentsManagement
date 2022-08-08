@@ -27,6 +27,7 @@ export class SubjectsUpdateComponent implements OnInit {
     id: [],
     subject: [null, [Validators.required]],
     keywords: [null, [Validators.required]],
+    niveau: [null, []],
     courses: [[]],
   });
 
@@ -95,6 +96,7 @@ export class SubjectsUpdateComponent implements OnInit {
       id: subjects.id,
       subject: subjects.subject,
       keywords: subjects.keywords,
+      niveau: subjects.niveau,
       courses: subjects.courses,
     });
   }
@@ -106,6 +108,7 @@ export class SubjectsUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       subject: this.editForm.get(['subject'])!.value,
       keywords: this.editForm.get(['keywords'])!.value,
+      niveau: this.editForm.get(['niveau'])!.value,
       courses: this.courses,
     };
   }

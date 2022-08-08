@@ -1,0 +1,81 @@
+<div class="content-page">
+  <div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid" [ngSwitch]="isAuthenticated()">
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="page-title-box">
+            <h4 class="page-title">Teaching</h4>
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="header-title mb-3">Teacher's data:</h4>
+              <div class="table-responsive">
+                <table class="table table-hover table-centered mb-0">
+                  <thead>
+                    <tr>
+                      <th width="70%">Full Name</th>
+                      <th>Start</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td
+                        style="cursor: pointer; font-weight: 900"
+                        routerLink="/account/settings"
+                        routerLinkActive="active"
+                        class="text-primary"
+                      >
+                        {{ account?.firstName }} {{ account?.lastName }}
+                      </td>
+                      <td>CHRONOMETER</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- end table responsive-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end Teacher's data -->
+      <!-- start activable content -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="header-title mb-3"></h4>
+              <div class="table-responsive">
+                <table class="table table-hover table-centered mb-0">
+                  <thead>
+                    <tr>
+                      <th>Theme</th>
+                      <th>Idée maitresse</th>
+                      <th>Piste de recherche</th>
+                      <th>Niveaux</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of subjectsList">
+                      <td>{{ item.subject }}</td>
+                      <td></td>
+                      <td>{{ item.keywords }}</td>
+                      <td>{{ item.niveau }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- end table responsive-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

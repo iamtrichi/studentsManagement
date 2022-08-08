@@ -32,7 +32,7 @@ export class StudentsController {
     constructor(private readonly studentsService: StudentsService) {}
 
     @Get('/')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'List all records',
@@ -51,7 +51,7 @@ export class StudentsController {
     }
 
     @Get('/:id')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'The found record',
@@ -62,7 +62,7 @@ export class StudentsController {
     }
 
     @PostMethod('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Create students' })
     @ApiResponse({
         status: 201,
@@ -77,7 +77,7 @@ export class StudentsController {
     }
 
     @Put('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update students' })
     @ApiResponse({
         status: 200,
@@ -90,7 +90,7 @@ export class StudentsController {
     }
 
     @Put('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update students with id' })
     @ApiResponse({
         status: 200,
@@ -103,7 +103,7 @@ export class StudentsController {
     }
 
     @Delete('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Delete students' })
     @ApiResponse({
         status: 204,

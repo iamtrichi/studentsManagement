@@ -14,6 +14,9 @@ export class Subjects extends BaseEntity {
     @Column({ name: 'keywords' })
     keywords: string;
 
+    @Column({ name: 'niveau', nullable: true })
+    niveau: string;
+
     @Column()
     courses: Course[];
 

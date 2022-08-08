@@ -23,4 +23,10 @@ export class SubjectsDTO extends BaseDTO {
         required: false,
     })
     courses: Course[];
+
+    @ApiModelProperty({
+        description: 'niveau field',
+        required: false,
+    })
+    niveau: string;
 }

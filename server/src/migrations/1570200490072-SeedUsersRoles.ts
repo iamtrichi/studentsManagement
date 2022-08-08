@@ -80,6 +80,7 @@ export class SeedUsersRoles1570200490072 implements MigrationInterface {
     subject: Subjects = {
         subject: 'English',
         keywords: 'Speaking, Reading, Writing',
+        niveau: '1',
         courses: [],
     };
 

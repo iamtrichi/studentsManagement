@@ -32,7 +32,7 @@ export class FilesController {
     constructor(private readonly filesService: FilesService) {}
 
     @Get('/')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'List all records',
@@ -50,7 +50,7 @@ export class FilesController {
     }
 
     @Get('/:id')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'The found record',
@@ -61,7 +61,7 @@ export class FilesController {
     }
 
     @PostMethod('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Create files' })
     @ApiResponse({
         status: 201,
@@ -76,7 +76,7 @@ export class FilesController {
     }
 
     @Put('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update files' })
     @ApiResponse({
         status: 200,
@@ -89,7 +89,7 @@ export class FilesController {
     }
 
     @Put('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update files with id' })
     @ApiResponse({
         status: 200,
@@ -102,7 +102,7 @@ export class FilesController {
     }
 
     @Delete('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Delete files' })
     @ApiResponse({
         status: 204,

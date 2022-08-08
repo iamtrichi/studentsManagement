@@ -1,0 +1,94 @@
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/cosmo/variables';
+@import '~bootstrap/scss/variables';
+
+.hipster {
+  display: inline-block;
+  width: 347px;
+  height: 497px;
+  background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
+  background-size: contain;
+}
+.card {
+  margin: 3px;
+}
+.center {
+  text-align: center;
+}
+.card-title {
+  font-weight: bolder;
+}
+.text-truncate {
+  overflow: inherit;
+  text-overflow: inherit;
+}
+
+[class^='fe-'] {
+  font-size: xx-large;
+  padding: 5px;
+}
+.left-side-menu {
+  display: block;
+}
+.content-page {
+  margin-left: 245px;
+  overflow: hidden;
+  padding: 0 15px 65px 15px;
+  min-height: 80vh;
+}
+/* wait autoprefixer update to allow simple generation of high pixel density media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (-moz-min-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .hipster {
+    background: url('../../content/images/jhipster_family_member_1.svg') no-repeat center top;
+    background-size: contain;
+  }
+  .left-side-menu {
+    display: none;
+  }
+  .content-page {
+    margin-left: 0px;
+  }
+}
+
+.left-side-menu {
+  width: 245px;
+  background: #fff;
+  bottom: 0;
+  position: absolute;
+  transition: all 0.1s ease-out;
+  top: -20px;
+  left: -14px;
+  box-shadow: 0 0 2px 0 rgb(0 0 0 / 10%);
+}
+
+#sidebar-menu ul {
+  list-style: none;
+  padding: 0px;
+  font-size: 1rem !important;
+  font-weight: bolder;
+}
+#side-menu ul li ul {
+  list-style: none;
+  padding: 0px;
+}
+#side-menu li i[class^='fe-'] {
+  font-size: 3rem !important;
+}
+div#sidebar-menu {
+  margin-left: 1em;
+  margin-top: 0.8rem;
+}
+
+.icon-orange {
+  color: #ff7518 !important;
+}
+.icon-blue {
+  color: rgb(39 128 227 / 50%) !important;
+}
+.icon-pink {
+  color: #ff0039 !important;
+}

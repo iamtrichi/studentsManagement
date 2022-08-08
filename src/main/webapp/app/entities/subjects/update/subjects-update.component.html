@@ -28,6 +28,14 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="field_niveau">Niveau</label>
+          <input type="text" class="form-control" name="niveau" id="field_niveau" data-cy="niveau" formControlName="niveau" />
+          <div *ngIf="editForm.get('niveau')!.invalid && (editForm.get('niveau')!.dirty || editForm.get('niveau')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('niveau')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" for="field_keywords">Courses:</label>
           <jhi-course [courses]="courses"></jhi-course>
         </div>

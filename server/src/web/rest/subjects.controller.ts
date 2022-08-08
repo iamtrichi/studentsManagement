@@ -32,7 +32,7 @@ export class SubjectsController {
     constructor(private readonly subjectsService: SubjectsService) {}
 
     @Get('/')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'List all records',
@@ -50,7 +50,7 @@ export class SubjectsController {
     }
 
     @Get('/:id')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'The found record',
@@ -61,7 +61,7 @@ export class SubjectsController {
     }
 
     @PostMethod('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Create subjects' })
     @ApiResponse({
         status: 201,
@@ -76,7 +76,7 @@ export class SubjectsController {
     }
 
     @Put('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update subjects' })
     @ApiResponse({
         status: 200,
@@ -89,7 +89,7 @@ export class SubjectsController {
     }
 
     @Put('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update subjects with id' })
     @ApiResponse({
         status: 200,
@@ -102,7 +102,7 @@ export class SubjectsController {
     }
 
     @Delete('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Delete subjects' })
     @ApiResponse({
         status: 204,

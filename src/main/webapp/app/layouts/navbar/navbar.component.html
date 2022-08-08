@@ -25,14 +25,22 @@
           </span>
         </a>
       </li>
+      <li class="nav-item" routerLinkActive="active" *jhiHasAnyAuthority="['ROLE_USER']" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/teacher" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="pencil-alt"></fa-icon>
+            <span>Teacher</span>
+          </span>
+        </a>
+      </li>
       <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
       <li
-        *ngSwitchCase="true"
         ngbDropdown
         class="nav-item dropdown pointer"
         display="dynamic"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']"
       >
         <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
           <span>

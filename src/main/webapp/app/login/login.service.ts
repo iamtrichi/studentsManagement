@@ -15,6 +15,10 @@ export class LoginService {
     return this.authServerProvider.login(credentials).pipe(mergeMap(() => this.accountService.identity(true)));
   }
 
+  getAccount(): Promise<Account | null> {
+    return this.accountService.identity().toPromise();
+  }
+
   logout(): void {
     this.authServerProvider.logout().subscribe({ complete: () => this.accountService.authenticate(null) });
   }

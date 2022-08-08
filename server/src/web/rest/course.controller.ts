@@ -32,7 +32,7 @@ export class CourseController {
     constructor(private readonly courseService: CourseService) {}
 
     @Get('/')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'List all records',
@@ -50,7 +50,7 @@ export class CourseController {
     }
 
     @Get('/:id')
-    @Roles(RoleType.USER)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiResponse({
         status: 200,
         description: 'The found record',
@@ -61,7 +61,7 @@ export class CourseController {
     }
 
     @PostMethod('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Create course' })
     @ApiResponse({
         status: 201,
@@ -76,7 +76,7 @@ export class CourseController {
     }
 
     @Put('/')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update course' })
     @ApiResponse({
         status: 200,
@@ -89,7 +89,7 @@ export class CourseController {
     }
 
     @Put('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Update course with id' })
     @ApiResponse({
         status: 200,
@@ -102,7 +102,7 @@ export class CourseController {
     }
 
     @Delete('/:id')
-    @Roles(RoleType.ADMIN)
+    @Roles(RoleType.ADMIN, RoleType.USER)
     @ApiOperation({ title: 'Delete course' })
     @ApiResponse({
         status: 204,

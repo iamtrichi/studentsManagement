@@ -5,10 +5,17 @@ export interface ISubjects {
   subject?: string;
   keywords?: string;
   courses?: ICourse[] | null | undefined;
+  niveau?: string | null | undefined;
 }
 
 export class Subjects implements ISubjects {
-  constructor(public id?: string, public subject?: string, public keywords?: string, public courses?: ICourse[] | null | undefined) {
+  constructor(
+    public id?: string,
+    public subject?: string,
+    public keywords?: string,
+    public courses?: ICourse[] | null | undefined,
+    public niveau?: string | null | undefined
+  ) {
     if (!courses) {
       this.courses = [];
     }
