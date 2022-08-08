@@ -57,6 +57,9 @@ export class TeacherComponent implements OnInit, OnDestroy {
   pageSize = 10;
   page = 1;
   pieChart: any;
+  chronometer: string | undefined;
+  chronometerJob: any;
+  counterDate!: Date;
   @ViewChild('pieCanvas')
   private pieCanvas!: ElementRef;
   constructor(
@@ -76,6 +79,22 @@ export class TeacherComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.makePieChart(options);
     }, 2000);
+  }
+
+  startChrono(): void {
+    this.counterDate = new Date();
+    this.chronometerJob = setInterval(() => {
+      const distance = Math.abs(new Date().getTime() - this.counterDate.getTime());
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      this.chronometer = `${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  }
+
+  stopChrono(): void {
+    clearInterval(this.chronometerJob);
+    this.chronometer = undefined;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   makePieChart(options: { labels: string[]; values: number[] }): void {

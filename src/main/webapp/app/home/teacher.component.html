@@ -34,7 +34,18 @@
                       >
                         {{ account?.firstName }} {{ account?.lastName }}
                       </td>
-                      <td>CHRONOMETER</td>
+                      <td>
+                        <div id="mTimer">
+                          {{ chronometer
+                          }}<button *ngIf="!chronometer" (click)="startChrono()" class="btn btn-primary">Start</button>&nbsp;&nbsp;<button
+                            *ngIf="chronometer"
+                            (click)="stopChrono()"
+                            class="btn btn-danger"
+                          >
+                            Stop
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
