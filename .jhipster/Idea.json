@@ -1,0 +1,23 @@
+{
+  "fields": [
+    {
+      "fieldName": "idee",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "theme",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "piste",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceClass",
+  "dto": "mapstruct",
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Idea",
+  "changelogDate": "20220814152103"
+}

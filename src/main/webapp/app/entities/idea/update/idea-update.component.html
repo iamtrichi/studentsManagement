@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-idea-heading" data-cy="IdeaCreateUpdateHeading">Create or edit a Idea</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_idee">Idee</label>
+          <input type="text" class="form-control" name="idee" id="field_idee" data-cy="idee" formControlName="idee" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_theme">Theme</label>
+          <input type="text" class="form-control" name="theme" id="field_theme" data-cy="theme" formControlName="theme" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_piste">Piste</label>
+          <input type="text" class="form-control" name="piste" id="field_piste" data-cy="piste" formControlName="piste" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_niveau">Niveau</label>
+          <input type="text" class="form-control" name="niveau" id="field_niveau" data-cy="niveau" formControlName="niveau" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
